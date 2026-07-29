@@ -1,0 +1,48 @@
+#toplevel_page_lepopup .wp-menu-image {
+	background: url(../images/icon.png) 50% 50% no-repeat;
+	background-size: contain;
+	height: 22px !important;
+	margin-top: 6px !important;
+}
+/* Gutenberg Blocks - begin */
+.editor-block-list-item-lepopup-form .block-editor-block-icon {
+	background: url(../images/icon.png) 0 0 no-repeat;
+	background-size: contain;
+}
+.lepopup-block-form {
+	display: flex;
+	flex-direction: row;
+	padding: 20px;
+	border: 2px dashed green;
+	border-radius: 8px;
+}
+.lepopup-block-form-label-icon {
+	display: flex;
+	vertical-align: top;
+	cursor: default;
+	line-height: 36px;
+	height: 36px;
+	width: 40px;
+	background: url(../images/icon.png) 0 0 no-repeat;
+	background-size: contain;
+}
+.lepopup-block-form-label {
+	font-family: arial;
+	vertical-align: top;
+	line-height: 32px;
+	display: flex;
+	margin-top: 4px;
+	font-size: 14px;
+	margin: 4px 8px 0 8px;
+	white-space: nowrap;
+}
+select.lepopup-block-form-value {
+	vertical-align: top;
+	line-height: 36px !important;
+	display: flex;
+	width: 100%;
+	font-size: 14px !important;
+	height: 36px;
+}
+/* Gutenberg Blocks - end */
+
