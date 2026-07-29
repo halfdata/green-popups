@@ -4,8 +4,8 @@ Plugin Name: Green Popups
 Plugin URI: https://greenpopups.com/
 Description: The most advanced popup builder for WordPress.
 Version: 7.6.0
-Author: Halfdata, Inc.
-Author URI: https://codecanyon.net/user/halfdata?ref=halfdata
+Author: Ivan Churakov
+Author URI: https://www.linkedin.com/in/ivan-churakov/
 */
 if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
 define('LEPOPUP_RECORDS_PER_PAGE', '50');
