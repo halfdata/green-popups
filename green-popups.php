@@ -1,11 +1,13 @@
 <?php
 /*
-Plugin Name: Green Popups
-Plugin URI: https://greenpopups.com/
-Description: The most advanced popup builder for WordPress.
-Version: 7.6.0
-Author: Ivan Churakov
-Author URI: https://www.linkedin.com/in/ivan-churakov/
+Plugin Name: 		Green Popups
+Plugin URI:			https://greenpopups.com/
+Description:		The most advanced popup builder for WordPress.
+Version:			7.6.0
+Author:				Ivan Churakov
+Author URI:			https://www.linkedin.com/in/ivan-churakov/
+License:           	GPLv2 or later
+License URI:       	https://www.gnu.org/licenses/gpl-2.0.html
 */
 if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
 define('LEPOPUP_RECORDS_PER_PAGE', '50');
