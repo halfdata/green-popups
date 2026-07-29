@@ -118,3 +118,7 @@ Please visit [changelog](https://greenpopups.com/changelog/) and check out what 
 ## Support us
 
 Feel to [buy me a coffee](https://buymeacoffee.com/halfdata). :-)
+
+## Disclaimer
+
+This plugin is distributed "AS IS" and the author bears no responsibility for any damages or issues caused by its use.
