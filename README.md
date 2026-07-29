@@ -79,9 +79,17 @@ custom post types filtered by any available taxonomies, dates, user roles, etc. 
 <li><strong>WordPress Best Practices.</strong> No any alerts from Plugin Check and WP_DEBUG.</li>
 </ul>
 
-## Demo
+## Frontend Demo
 
 Visit [our website](https://greenpopups.com/) to see how it works.
+
+## Backend Demo
+
+Try the following credentials to test Green Popups backend:
+
+URL: https://greenpopups.com/wordpress-demo/wp-admin/<br/>
+Login: demo<br/>
+Password: demo
 
 ## Installation
 Green Popups is a WordPress plugin and it is installed as regular WordPress plugin:
