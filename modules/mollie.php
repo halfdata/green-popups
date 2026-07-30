@@ -121,7 +121,7 @@ class lepopup_mollie_class {
 			'amount' => array('currency' => $data["currency"], 'value' => number_format($data['amount'], 2, '.', '')),
 			'description' => (!empty($data['item-name']) ? esc_html($data['item-name']) : 'Fee'),
 			'redirectUrl' => (empty($data['redirect-url']) ? esc_html($_SERVER["HTTP_REFERER"]) : esc_html($data['redirect-url'])),
-			'webhookUrl' => (defined('UAP_CORE') ? admin_url('do.php').'?lepopup-ipn=mollie' : get_bloginfo('url').'/?lepopup-ipn=mollie').'&record-id='.$data["record-id"],
+			'webhookUrl' => get_bloginfo('url').'/?lepopup-ipn=mollie&record-id='.$data["record-id"],
 			'metadata' => array('record-id' => $data["record-id"])
 		);
 		$payment = $this->connect($data['api-key'], 'payments', $post_data);

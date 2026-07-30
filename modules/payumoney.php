@@ -72,7 +72,7 @@ class lepopup_payumoney_class {
 							<label>'.esc_html__('Webhook URL', 'lepopup').'</label>
 						</div>
 						<div class="lepopup-properties-content">
-							<input type="text" readonly="readonly" value="'.(defined('UAP_CORE') ? esc_html(admin_url('do.php')) : esc_html(get_bloginfo('url').'/lepopup-payumoney-ipn-handler/')).'" onclick="this.focus();this.select();" />
+							<input type="text" readonly="readonly" value="'.esc_html(get_bloginfo('url').'/lepopup-payumoney-ipn-handler/').'" onclick="this.focus();this.select();" />
 						</div>
 					</div>
 					<div class="lepopup-properties-item">
@@ -272,7 +272,7 @@ class lepopup_payumoney_class {
 	function front_init() {
 		global $wpdb, $lepopup;
 		$form_object = null;
-		if ((array_key_exists('REQUEST_URI', $_SERVER) && strpos($_SERVER['REQUEST_URI'], 'lepopup-payumoney-ipn-handler') !== false) || defined('UAP_CORE')) {
+		if ((array_key_exists('REQUEST_URI', $_SERVER) && strpos($_SERVER['REQUEST_URI'], 'lepopup-payumoney-ipn-handler') !== false)) {
 			$headers = getallheaders();
 			if (is_array($headers) && array_key_exists('LEPOPUP-UID', $headers) && $headers['LEPOPUP-UID'] == $lepopup->installation_uid) {
 				$payload = @file_get_contents('php://input');
@@ -360,10 +360,8 @@ class lepopup_payumoney_class {
 				http_response_code(200);
 				exit;
 			} else {
-				if (!defined('UAP_CORE')) {
-					http_response_code(200);
-					exit;
-				}
+				http_response_code(200);
+				exit;
 			}
 		}
 	}

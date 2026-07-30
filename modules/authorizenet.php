@@ -43,7 +43,7 @@ class lepopup_authorizenet_class {
 			$html = '
 			<div class="lepopup-integrations-important">
 				'.esc_html__('Important! Make sure that you set the following Webhook URL in your Authorize.Net account ((Account > Settings > Business Settings > Notification Settings > Webhooks)).', 'lepopup').'
-				<input type="text" readonly="readonly" value="'.(defined('UAP_CORE') ? esc_html(admin_url('do.php')) : esc_html(get_bloginfo('url').'/lepopup-authnet-ipn-handler/')).'" onclick="this.focus();this.select();" />
+				<input type="text" readonly="readonly" value="'.esc_html(get_bloginfo('url').'/lepopup-authnet-ipn-handler/').'" onclick="this.focus();this.select();" />
 			</div>
 			<div class="lepopup-properties-item">
 				<div class="lepopup-properties-label">
@@ -243,7 +243,7 @@ class lepopup_authorizenet_class {
 	function front_init() {
 		global $wpdb, $lepopup;
 		$form_object = null;
-		if ((array_key_exists('REQUEST_URI', $_SERVER) && strpos($_SERVER['REQUEST_URI'], 'lepopup-authnet-ipn-handler') !== false) || defined('UAP_CORE')) {
+		if ((array_key_exists('REQUEST_URI', $_SERVER) && strpos($_SERVER['REQUEST_URI'], 'lepopup-authnet-ipn-handler') !== false)) {
 			$headers = getallheaders();
 			if (is_array($headers) && array_key_exists('X-ANET-Signature', $headers)) {
 				$payload = @file_get_contents('php://input');

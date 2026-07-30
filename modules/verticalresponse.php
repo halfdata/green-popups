@@ -289,7 +289,7 @@ class lepopup_verticalresponse_class {
 		<ol>
 			<li>
 				Register new Application (create Client ID) in <a data-href="https://developer.verticalresponse.com/apps/register" target="_blank" href="https://developer.verticalresponse.com/apps/register">VerticalResponse Developer Console</a>.
-				<input type="hidden" readonly="readonly" id="redirect-uri" name="redirect-uri" onclick="this.focus();this.select();" value="'.(defined('UAP_CORE') ? esc_html(admin_url('do.php')) : esc_html(rtrim(get_bloginfo('url'), '/'))).'/lepopup-verticalresponse-redirect-uri/'.'" />
+				<input type="hidden" readonly="readonly" id="redirect-uri" name="redirect-uri" onclick="this.focus();this.select();" value="'.esc_html(rtrim(get_bloginfo('url'), '/')).'/lepopup-verticalresponse-redirect-uri/" />
 			</li>
 			<li>
 				Enter Client ID / Key and Client Secret into fields below.

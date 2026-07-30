@@ -1762,9 +1762,6 @@ class lepopup_class {
 		if ($this->options['mask-enable'] != 'on') {
 			unset($this->element_properties_meta['text']['mask']);
 		}
-		if (defined('UAP_CORE')) {
-			unset($this->element_properties_meta['settings']['personal-keys']);
-		}
 		$this->toolbar_tools = array(
 			'rectangle' => array(
 				'title' => esc_html__('Rectangle / Square', 'lepopup'),
@@ -2257,24 +2254,18 @@ class lepopup_class {
 		if (file_exists(dirname(__FILE__).'/modules/egoi.php') && $this->advanced_options['enable-egoi'] == 'on') include_once(dirname(__FILE__).'/modules/egoi.php');
 		if (file_exists(dirname(__FILE__).'/modules/emailoctopus.php') && $this->advanced_options['enable-emailoctopus'] == 'on') include_once(dirname(__FILE__).'/modules/emailoctopus.php');
 		if (file_exists(dirname(__FILE__).'/modules/encharge.php') && $this->advanced_options['enable-encharge'] == 'on') include_once(dirname(__FILE__).'/modules/encharge.php');
-		if (!defined('UAP_CORE')) {
-			if (file_exists(dirname(__FILE__).'/modules/fluentcrm.php') && $this->advanced_options['enable-fluentcrm'] == 'on') include_once(dirname(__FILE__).'/modules/fluentcrm.php');
-		}
+		if (file_exists(dirname(__FILE__).'/modules/fluentcrm.php') && $this->advanced_options['enable-fluentcrm'] == 'on') include_once(dirname(__FILE__).'/modules/fluentcrm.php');
 		if (file_exists(dirname(__FILE__).'/modules/freshmail.php') && $this->advanced_options['enable-freshmail'] == 'on') include_once(dirname(__FILE__).'/modules/freshmail.php');
 		if (file_exists(dirname(__FILE__).'/modules/gatewayapi.php') && $this->advanced_options['enable-gatewayapi'] == 'on') include_once(dirname(__FILE__).'/modules/gatewayapi.php');
 		if (file_exists(dirname(__FILE__).'/modules/getresponse.php') && $this->advanced_options['enable-getresponse'] == 'on') include_once(dirname(__FILE__).'/modules/getresponse.php');
 		if (file_exists(dirname(__FILE__).'/modules/gist.php') && $this->advanced_options['enable-gist'] == 'on') include_once(dirname(__FILE__).'/modules/gist.php');
-		if (!defined('UAP_CORE')) {
-			if (file_exists(dirname(__FILE__).'/modules/groundhogg.php') && $this->advanced_options['enable-groundhogg'] == 'on') include_once(dirname(__FILE__).'/modules/groundhogg.php');
-		}
+		if (file_exists(dirname(__FILE__).'/modules/groundhogg.php') && $this->advanced_options['enable-groundhogg'] == 'on') include_once(dirname(__FILE__).'/modules/groundhogg.php');
 		if (file_exists(dirname(__FILE__).'/modules/hubspot.php') && $this->advanced_options['enable-hubspot'] == 'on') include_once(dirname(__FILE__).'/modules/hubspot.php');
 		if (file_exists(dirname(__FILE__).'/modules/inbox.php') && $this->advanced_options['enable-inbox'] == 'on') include_once(dirname(__FILE__).'/modules/inbox.php');
 		if (file_exists(dirname(__FILE__).'/modules/infomaniak.php') && $this->advanced_options['enable-infomaniak'] == 'on') include_once(dirname(__FILE__).'/modules/infomaniak.php');
 		if (file_exists(dirname(__FILE__).'/modules/intercom.php') && $this->advanced_options['enable-intercom'] == 'on') include_once(dirname(__FILE__).'/modules/intercom.php');
 		if (file_exists(dirname(__FILE__).'/modules/interspire.php') && $this->advanced_options['enable-interspire'] == 'on') include_once(dirname(__FILE__).'/modules/interspire.php');
-		if (!defined('UAP_CORE')) {
-			if (file_exists(dirname(__FILE__).'/modules/jetpack.php') && $this->advanced_options['enable-jetpack'] == 'on') include_once(dirname(__FILE__).'/modules/jetpack.php');
-		}
+		if (file_exists(dirname(__FILE__).'/modules/jetpack.php') && $this->advanced_options['enable-jetpack'] == 'on') include_once(dirname(__FILE__).'/modules/jetpack.php');
 		if (file_exists(dirname(__FILE__).'/modules/klaviyo.php') && $this->advanced_options['enable-klaviyo'] == 'on') include_once(dirname(__FILE__).'/modules/klaviyo.php');
 		if (file_exists(dirname(__FILE__).'/modules/madmimi.php') && $this->advanced_options['enable-madmimi'] == 'on') include_once(dirname(__FILE__).'/modules/madmimi.php');
 		if (file_exists(dirname(__FILE__).'/modules/mailautic.php') && $this->advanced_options['enable-mailautic'] == 'on') include_once(dirname(__FILE__).'/modules/mailautic.php');
@@ -2285,13 +2276,9 @@ class lepopup_class {
 		if (file_exists(dirname(__FILE__).'/modules/mailgun.php') && $this->advanced_options['enable-mailgun'] == 'on') include_once(dirname(__FILE__).'/modules/mailgun.php');
 		if (file_exists(dirname(__FILE__).'/modules/mailjet.php') && $this->advanced_options['enable-mailjet'] == 'on') include_once(dirname(__FILE__).'/modules/mailjet.php');
 		if (file_exists(dirname(__FILE__).'/modules/mailmodo.php') && $this->advanced_options['enable-mailmodo'] == 'on') include_once(dirname(__FILE__).'/modules/mailmodo.php');
-		if (!defined('UAP_CORE')) {
-			if (file_exists(dirname(__FILE__).'/modules/mailpoet.php') && $this->advanced_options['enable-mailpoet'] == 'on') include_once(dirname(__FILE__).'/modules/mailpoet.php');
-		}
+		if (file_exists(dirname(__FILE__).'/modules/mailpoet.php') && $this->advanced_options['enable-mailpoet'] == 'on') include_once(dirname(__FILE__).'/modules/mailpoet.php');
 		if (file_exists(dirname(__FILE__).'/modules/mailrelay.php') && $this->advanced_options['enable-mailrelay'] == 'on') include_once(dirname(__FILE__).'/modules/mailrelay.php');
-		if (!defined('UAP_CORE')) {
-			if (file_exists(dirname(__FILE__).'/modules/mailster.php') && $this->advanced_options['enable-mailster'] == 'on') include_once(dirname(__FILE__).'/modules/mailster.php');
-		}
+		if (file_exists(dirname(__FILE__).'/modules/mailster.php') && $this->advanced_options['enable-mailster'] == 'on') include_once(dirname(__FILE__).'/modules/mailster.php');
 		if (file_exists(dirname(__FILE__).'/modules/mailwizz.php') && $this->advanced_options['enable-mailwizz'] == 'on') include_once(dirname(__FILE__).'/modules/mailwizz.php');
 		if (file_exists(dirname(__FILE__).'/modules/mautic.php') && $this->advanced_options['enable-mautic'] == 'on') include_once(dirname(__FILE__).'/modules/mautic.php');
 		if (file_exists(dirname(__FILE__).'/modules/mojsms.php') && $this->advanced_options['enable-mojsms'] == 'on') include_once(dirname(__FILE__).'/modules/mojsms.php');
@@ -2315,10 +2302,8 @@ class lepopup_class {
 		if (file_exists(dirname(__FILE__).'/modules/sendy.php') && $this->advanced_options['enable-sendy'] == 'on') include_once(dirname(__FILE__).'/modules/sendy.php');
 		if (file_exists(dirname(__FILE__).'/modules/sgautorepondeur.php') && $this->advanced_options['enable-sgautorepondeur'] == 'on') include_once(dirname(__FILE__).'/modules/sgautorepondeur.php');
 		if (file_exists(dirname(__FILE__).'/modules/socketlabs.php') && $this->advanced_options['enable-socketlabs'] == 'on') include_once(dirname(__FILE__).'/modules/socketlabs.php');
-		if (!defined('UAP_CORE')) {
-			if (file_exists(dirname(__FILE__).'/modules/thenewsletterplugin.php') && $this->advanced_options['enable-thenewsletterplugin'] == 'on') include_once(dirname(__FILE__).'/modules/thenewsletterplugin.php');
-			if (file_exists(dirname(__FILE__).'/modules/tribulant.php') && $this->advanced_options['enable-tribulant'] == 'on') include_once(dirname(__FILE__).'/modules/tribulant.php');
-		}
+		if (file_exists(dirname(__FILE__).'/modules/thenewsletterplugin.php') && $this->advanced_options['enable-thenewsletterplugin'] == 'on') include_once(dirname(__FILE__).'/modules/thenewsletterplugin.php');
+		if (file_exists(dirname(__FILE__).'/modules/tribulant.php') && $this->advanced_options['enable-tribulant'] == 'on') include_once(dirname(__FILE__).'/modules/tribulant.php');
 		if (file_exists(dirname(__FILE__).'/modules/twilio.php') && $this->advanced_options['enable-twilio'] == 'on') include_once(dirname(__FILE__).'/modules/twilio.php');
 		if (file_exists(dirname(__FILE__).'/modules/verticalresponse.php') && $this->advanced_options['enable-verticalresponse'] == 'on') include_once(dirname(__FILE__).'/modules/verticalresponse.php');
 		if (file_exists(dirname(__FILE__).'/modules/ymlp.php') && $this->advanced_options['enable-ymlp'] == 'on') include_once(dirname(__FILE__).'/modules/ymlp.php');
@@ -2327,9 +2312,7 @@ class lepopup_class {
 		if (file_exists(dirname(__FILE__).'/modules/htmlform.php') && $this->advanced_options['enable-htmlform'] == 'on') include_once(dirname(__FILE__).'/modules/htmlform.php');
 		if (file_exists(dirname(__FILE__).'/modules/post.php') && $this->advanced_options['enable-post'] == 'on') include_once(dirname(__FILE__).'/modules/post.php');
 		if (file_exists(dirname(__FILE__).'/modules/mysql.php') && $this->advanced_options['enable-mysql'] == 'on') include_once(dirname(__FILE__).'/modules/mysql.php');
-		if (!defined('UAP_CORE')) {
-			if (file_exists(dirname(__FILE__).'/modules/wpuser.php') && $this->advanced_options['enable-wpuser'] == 'on') include_once(dirname(__FILE__).'/modules/wpuser.php');
-		}
+		if (file_exists(dirname(__FILE__).'/modules/wpuser.php') && $this->advanced_options['enable-wpuser'] == 'on') include_once(dirname(__FILE__).'/modules/wpuser.php');
 
 		if (file_exists(dirname(__FILE__).'/modules/authorizenet.php') && $this->advanced_options['enable-authorizenet'] == 'on') include_once(dirname(__FILE__).'/modules/authorizenet.php');
 		if (file_exists(dirname(__FILE__).'/modules/blockchain.php') && $this->advanced_options['enable-blockchain'] == 'on') include_once(dirname(__FILE__).'/modules/blockchain.php');
@@ -2413,10 +2396,8 @@ class lepopup_class {
 	static function activate() {
 		global $wpdb;
 		$webfont_version = get_option('lepopup-webfonts-version', 0);
-		if (!defined('UAP_CORE')) {
-			include_once(dirname(__FILE__).'/modules/core-targeting.php');
-			lepopup_class_targeting::activate();
-		}
+		include_once(dirname(__FILE__).'/modules/core-targeting.php');
+		lepopup_class_targeting::activate();
 		$create_default = false;
 		$table_name = $wpdb->prefix."lepopup_campaigns";
 		if($wpdb->get_var("SHOW TABLES LIKE '".$table_name."'") != $table_name) {
@@ -2724,10 +2705,8 @@ class lepopup_class {
 		global $wpdb;
 		$clean_database = get_option('lepopup-advanced-clean-database', 'off');
 		if ($clean_database == 'on' || $_force_delete) {
-			if (!defined('UAP_CORE')) {
-				include_once(dirname(__FILE__).'/modules/core-targeting.php');
-				lepopup_class_targeting::deactivate();
-			}
+			include_once(dirname(__FILE__).'/modules/core-targeting.php');
+			lepopup_class_targeting::deactivate();
 		}
 	}
 
@@ -3155,9 +3134,7 @@ class lepopup_class {
 				ob_flush();
 				exit;
 			} else {
-				if (!defined('UAP_CORE')) {
-					require_once(ABSPATH.'wp-admin/includes/file.php');
-				}
+				require_once(ABSPATH.'wp-admin/includes/file.php');
 				$zip = new ZipArchive();
 				$zip_filename = $upload_dir["basedir"].'/'.LEPOPUP_UPLOADS_DIR.'/temp/'.$this->random_string(16).'.zip';
 				if ($zip->open($zip_filename, ZipArchive::CREATE) !== true) {
@@ -3583,9 +3560,9 @@ class lepopup_class {
 	}
 
 	function handle_demo_mode() {
-		if (defined('HALFDATA_DEMO') && HALFDATA_DEMO === true && !defined('UAP_CORE') && is_user_logged_in() && !current_user_can('edit_posts') && is_admin()) {
+		if (defined('HALFDATA_DEMO') && HALFDATA_DEMO === true && is_user_logged_in() && !current_user_can('edit_posts') && is_admin()) {
 			$this->demo_mode = true;
-		} else if (defined('HALFDATA_DEMO') && HALFDATA_DEMO === true && defined('UAP_CORE')) {
+		} else if (defined('HALFDATA_DEMO') && HALFDATA_DEMO === true) {
 			$this->demo_mode = true;
 		}
 	}

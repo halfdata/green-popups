@@ -177,7 +177,7 @@ class lepopup_payfast_class {
 			'merchant_key' => $data['merchant-key'],
 			'return_url' => (empty($data['success-url']) ? $_SERVER["HTTP_REFERER"] : $data['success-url']),
 			'cancel_url' => (empty($data['cancel-url']) ? $_SERVER["HTTP_REFERER"] : $data['cancel-url']),
-			'notify_url' => (defined('UAP_CORE') ? admin_url('do.php').'?lepopup-ipn=payfast' : get_bloginfo('url').'/?lepopup-ipn=payfast'),
+			'notify_url' => get_bloginfo('url').'/?lepopup-ipn=payfast',
 			'm_payment_id' => $data["record-id"].'-'.time(),
 			'amount' => number_format($data['amount'], 2, '.', ''),
 			'item_name' => (!empty($data['item-name']) ? $data['item-name'] : 'Fee'),

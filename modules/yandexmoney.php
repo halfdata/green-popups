@@ -43,7 +43,7 @@ class lepopup_yandexmoney_class {
 			$html = '
 			<div class="lepopup-integrations-important">
 				'.sprintf(esc_html__('Important! Make sure that you set the following URL for HTTP-notices in your %sYandex.Money Dashboard%s.', 'lepopup'), '<a href="https://money.yandex.ru/myservices/online.xml" target="_blank">', '</a>').'
-				<input type="text" readonly="readonly" value="'.(defined('UAP_CORE') ? esc_html(admin_url('do.php').'?lepopup-ipn=yandexmoney') : esc_html(get_bloginfo('url').'/?lepopup-ipn=yandexmoney')).'" onclick="this.focus();this.select();" />
+				<input type="text" readonly="readonly" value="'.esc_html(get_bloginfo('url').'/?lepopup-ipn=yandexmoney').'" onclick="this.focus();this.select();" />
 			</div>
 			<div class="lepopup-properties-item">
 				<div class="lepopup-properties-label">

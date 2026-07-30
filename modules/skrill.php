@@ -152,7 +152,7 @@ class lepopup_skrill_class {
 			'transaction_id' => $data["record-id"].'-'.time(),
 			'return_url' => empty($data['success-url']) ? esc_html($_SERVER["HTTP_REFERER"]) : esc_html($data['success-url']),
 			'cancel_url' => empty($data['cancel-url']) ? esc_html($_SERVER["HTTP_REFERER"]) : esc_html($data['cancel-url']),
-			'status_url' => defined('UAP_CORE') ? esc_html(admin_url('do.php').'?lepopup-ipn=skrill') : esc_html(get_bloginfo('url').'/?lepopup-ipn=skrill'),
+			'status_url' => esc_html(get_bloginfo('url').'/?lepopup-ipn=skrill'),
 			'language' => 'EN',
 			'prepare_only' => 1,
 			'merchant_fields' => 'record',

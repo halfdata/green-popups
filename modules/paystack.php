@@ -39,7 +39,7 @@ class lepopup_paystack_class {
 			$html = '
 			<div class="lepopup-integrations-important">
 				'.sprintf(esc_html__('Important! Make sure that you set the following Webhook URL in your %sPaystack Dashboard%s.', 'lepopup'), '<a href="https://dashboard.paystack.com/#/settings/developer" target="_blank">', '</a>').'
-				<input type="text" readonly="readonly" value="'.(defined('UAP_CORE') ? esc_html(admin_url('do.php').'?lepopup-ipn=paystack') : esc_html(get_bloginfo('url').'/?lepopup-ipn=paystack')).'" onclick="this.focus();this.select();" />
+				<input type="text" readonly="readonly" value="'.esc_html(get_bloginfo('url').'/?lepopup-ipn=paystack').'" onclick="this.focus();this.select();" />
 			</div>
 			<div class="lepopup-properties-item">
 				<div class="lepopup-properties-label">

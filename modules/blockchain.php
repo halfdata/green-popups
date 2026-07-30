@@ -150,7 +150,7 @@ class lepopup_blockchain_class {
 				return array('status' => 'ERROR', 'message' => 'Can not convert to BTC.');
 			}
 		}
-		$callback_base = defined('UAP_CORE') ? admin_url('do.php') : get_bloginfo('url').'/';
+		$callback_base = get_bloginfo('url').'/';
 		$url = 'https://api.blockchain.info/v2/receive?xpub='.$data['xpub'].'&callback='.urlencode($callback_base.'?lepopup-ipn=blockchain&record_id='.$data["record-id"].'&btc_amount='.number_format($btc_amount, 8, ".", "").'&amount='.number_format($btc_amount, 8, ".", "").'&secret='.$data['secret']).'&key='.$data['api-key'].'&gap_limit=1000';
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_POST, false);

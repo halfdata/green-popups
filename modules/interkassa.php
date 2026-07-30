@@ -175,7 +175,7 @@ class lepopup_interkassa_class {
 		$params['ik_cur'] = esc_html($data["currency"]);
 		$params['ik_pm_no'] = $data["record-id"].'-'.time();
 		$params['ik_desc'] = (!empty($data['item-name']) ? esc_html($data['item-name']) : 'Fee');
-		$params['ik_ia_u'] = defined('UAP_CORE') ? esc_html(admin_url('do.php').'?lepopup-ipn=interkassa') : esc_html(get_bloginfo('url').'/?lepopup-ipn=interkassa');
+		$params['ik_ia_u'] = esc_html(get_bloginfo('url').'/?lepopup-ipn=interkassa');
 		$params['ik_ia_m'] = 'POST';
 		$params['ik_suc_u'] = empty($data['success-url']) ? esc_html($_SERVER["HTTP_REFERER"]) : esc_html($data['success-url']);
 		$params['ik_suc_m'] = 'GET';

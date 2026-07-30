@@ -35,13 +35,11 @@ class lepopup_ajax_class {
 			add_action('wp_ajax_lepopup-campaigns-delete', array(&$this, "admin_campaigns_delete"));
 			add_action('wp_ajax_lepopup-campaigns-stats-reset', array(&$this, "admin_campaigns_stats_reset"));
 			add_action('wp_ajax_lepopup-migrate', array(&$this, "admin_migrate"));
-			if (!defined('UAP_CORE')) {
-				add_action('wp_ajax_lepopup-target-properties', array(&$this, "admin_target_properties"));
-				add_action('wp_ajax_lepopup-target-taxonomies', array(&$this, "admin_target_taxonomies"));
-				add_action('wp_ajax_lepopup-target-posts', array(&$this, "admin_target_posts"));
-				add_action('wp_ajax_lepopup-target-save', array(&$this, "admin_target_save"));
-				add_action('wp_ajax_lepopup-targets-save-list', array(&$this, "admin_targets_save_list"));
-			}
+			add_action('wp_ajax_lepopup-target-properties', array(&$this, "admin_target_properties"));
+			add_action('wp_ajax_lepopup-target-taxonomies', array(&$this, "admin_target_taxonomies"));
+			add_action('wp_ajax_lepopup-target-posts', array(&$this, "admin_target_posts"));
+			add_action('wp_ajax_lepopup-target-save', array(&$this, "admin_target_save"));
+			add_action('wp_ajax_lepopup-targets-save-list', array(&$this, "admin_targets_save_list"));
 
 			add_action('wp_ajax_lepopup-async-init', array(&$this, "front_async_init"));
 			add_action('wp_ajax_nopriv_lepopup-async-init', array(&$this, "front_async_init"));
@@ -1190,134 +1188,7 @@ class lepopup_ajax_class {
 				else echo json_encode($return_data);
 				exit;
 			}
-			if (defined('UAP_CORE')) {
-				$html = '
-			<div class="lepopup-using-details">
-				<table class="lepopup-using-table">
-					<tr>
-						<td colspan="2">
-							<span>'.sprintf(esc_html__('Important! Make sure that you properly embedded script into your website, as it is said on %sHow To Use%s page.', 'lepopup'), '<a target="_blank" href="?page=lepopup-using">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnClick (standard)', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('Use the following URL with a link/button (href attribute):', 'lepopup').'</span>
-							<input type="text" readonly="readonly" value="#lepopup-'.esc_html($form_details['slug']).'" onclick="this.focus();this.select();" />
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnClick (JavaScript)', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('Add the following attribute to your HTML-element:', 'lepopup').'</span>
-							<input type="text" readonly="readonly" value="'.esc_html('onclick="lepopup_popup_open(\''.esc_html($form_details['slug']).'\'); return false;"').'" onclick="this.focus();this.select();" />
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('JavaScript', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('Use the following javascript function to open the popup:', 'lepopup').'</span>
-							<input type="text" readonly="readonly" value="lepopup_popup_open(\''.esc_html($form_details['slug']).'\');" onclick="this.focus();this.select();" />
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnLoad', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when website loaded (OnLoad popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onload", {
-    item:        "'.esc_html($form_details['slug']).'",
-    item_mobile: "'.esc_html($form_details['slug']).'",
-    mode:        "every-time",
-    period:      24,
-    delay:       0,
-    close_delay: 0
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnScroll', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when user scroll down the page (OnScroll popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onscroll", {
-    item:        "'.esc_html($form_details['slug']).'",
-    item_mobile: "'.esc_html($form_details['slug']).'",
-    mode:        "every-time",
-    period:      24,
-    offset:      "50%"
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnExit', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when user moves mouse cursor to top edge of browser window, assuming that he/she is going to leave the page (OnExit popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onexit", {
-    item:        "'.esc_html($form_details['slug']).'",
-    mode:        "every-time",
-    period:      24
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnInactivity', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when user does nothing on website for certain period of time (OnInactivity popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onidle", {
-    item:        "'.esc_html($form_details['slug']).'",
-    item_mobile: "'.esc_html($form_details['slug']).'",
-    mode:        "every-time",
-    period:      24,
-    delay:       30
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnAdBlockDetected', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when AdBlock or similar software detected (OnAdBlockDetected popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onadb", {
-    item:        "'.esc_html($form_details['slug']).'",
-    item_mobile: "'.esc_html($form_details['slug']).'",
-    mode:        "every-time",
-    period:      24
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('Inline', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('Use the following HTML-snippet to embed the popup as inline object.', 'lepopup').'</span>
-							<input type="text" readonly="readonly" value="&lt;div class=\'lepopup-inline\' data-slug=\''.esc_html($form_details['slug']).'\'&gt;&lt;/div&gt;" onclick="this.focus();this.select();" />
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('Link locker (manual)', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('The alternate way to lock links is to construct locking URL manually. Use this method if your link is located in area which does not support shortcodes.', 'lepopup').'</span>
-							<input type="text" value="" placeholder="'.esc_html__('Paste original URL here...', 'lepopup').'" data-slug="'.esc_html($form_details['slug']).'" oninput="jQuery(\'#lepopup-locking-url\').val(\'#lepopup-\'+jQuery(this).attr(\'data-slug\')+\':\'+lepopup_encode64(jQuery(this).val()));" />
-							<span>'.esc_html__('Locking URL.', 'lepopup').'</span>
-							<input type="text" id="lepopup-locking-url" readonly="readonly" value="" placeholder="..." onclick="this.focus();this.select();" />
-						</td>
-					</tr>
-				</table>
-			</div>';
-			} else {
-				$html = '
+			$html = '
 			<div class="lepopup-using-details">
 				<table class="lepopup-using-table">
 					<tr>
@@ -1536,7 +1407,6 @@ lepopup_add_event("onadb", {
 					</tr>
 				</table>
 			</div>';
-			}
 			$return_data = array(
 				'status' => 'OK',
 				'html' => $html,
@@ -1571,127 +1441,7 @@ lepopup_add_event("onadb", {
 				else echo json_encode($return_data);
 				exit;
 			}
-			if (defined('UAP_CORE')) {
-				$html = '
-			<div class="lepopup-using-details">
-				<table class="lepopup-using-table">
-					<tr>
-						<td colspan="2">
-							<span>'.sprintf(esc_html__('Important! Make sure that you properly embedded script into your website, as it is said on %sHow To Use%s page.', 'lepopup'), '<a target="_blank" href="?page=lepopup-using">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnClick (standard)', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('Use the following URL with a link/button (href attribute):', 'lepopup').'</span>
-							<input type="text" readonly="readonly" value="#lepopup-'.esc_html($campaign_details['slug']).'" onclick="this.focus();this.select();" />
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnClick (JavaScript)', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('Add the following attribute to your HTML-element:', 'lepopup').'</span>
-							<input type="text" readonly="readonly" value="'.esc_html('onclick="lepopup_popup_open(\''.esc_html($campaign_details['slug']).'\'); return false;"').'" onclick="this.focus();this.select();" />
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('JavaScript', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('Use the following javascript function to open the popup:', 'lepopup').'</span>
-							<input type="text" readonly="readonly" value="lepopup_popup_open(\''.esc_html($campaign_details['slug']).'\');" onclick="this.focus();this.select();" />
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnLoad', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when website loaded (OnLoad popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onload", {
-    item:        "'.esc_html($campaign_details['slug']).'",
-    item_mobile: "'.esc_html($campaign_details['slug']).'",
-    mode:        "every-time",
-    period:      24,
-    delay:       0,
-    close_delay: 0
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnScroll', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when user scroll down the page (OnScroll popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onscroll", {
-    item:        "'.esc_html($campaign_details['slug']).'",
-    item_mobile: "'.esc_html($campaign_details['slug']).'",
-    mode:        "every-time",
-    period:      24,
-    offset:      "50%"
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnExit', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when user moves mouse cursor to top edge of browser window, assuming that he/she is going to leave the page (OnExit popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onexit", {
-    item:        "'.esc_html($campaign_details['slug']).'",
-    mode:        "every-time",
-    period:      24
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnInactivity', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when user does nothing on website for certain period of time (OnInactivity popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onidle", {
-    item:        "'.esc_html($campaign_details['slug']).'",
-    item_mobile: "'.esc_html($campaign_details['slug']).'",
-    mode:        "every-time",
-    period:      24,
-    delay:       30
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('OnAdBlockDetected', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('To display the popup, when AdBlock or similar software detected (OnAdBlockDetected popup). Insert the following JavaScript-snippet at the end of body section of the page (below lepopup.js).', 'lepopup').'</span>
-							<pre>&lt;script&gt;
-lepopup_add_event("onadb", {
-    item:        "'.esc_html($campaign_details['slug']).'",
-    item_mobile: "'.esc_html($campaign_details['slug']).'",
-    mode:        "every-time",
-    period:      24
-});
-&lt;/script&gt;</pre>
-							<span>'.sprintf(esc_html__('Please find a detailed description of parameters in %sdocumentation%s.', 'lepopup'), '<a href="https://greenpopups.com/documentation/#chapter-using-popups" target="_blank">', '</a>').'</span>
-						</td>
-					</tr>
-					<tr>
-						<th>'.esc_html__('Link locker (manual)', 'lepopup').'</th>
-						<td>
-							<span>'.esc_html__('The alternate way to lock links is to construct locking URL manually. Use this method if your link is located in area which does not support shortcodes.', 'lepopup').'</span>
-							<input type="text" value="" placeholder="'.esc_html__('Paste original URL here...', 'lepopup').'" data-slug="'.esc_html($campaign_details['slug']).'" oninput="jQuery(\'#lepopup-locking-url\').val(\'#lepopup-\'+jQuery(this).attr(\'data-slug\')+\':\'+lepopup_encode64(jQuery(this).val()));" />
-							<span>'.esc_html__('Locking URL.', 'lepopup').'</span>
-							<input type="text" id="lepopup-locking-url" readonly="readonly" value="" placeholder="..." onclick="this.focus();this.select();" />
-						</td>
-					</tr>
-				</table>
-			</div>';
-			} else {
-				$html = '
+			$html = '
 			<div class="lepopup-using-details">
 				<table class="lepopup-using-table">
 					<tr>
@@ -1865,7 +1615,6 @@ lepopup_add_event("onadb", {
 					</tr>
 				</table>
 			</div>';
-			}
 			$return_data = array(
 				'status' => 'OK',
 				'html' => $html,
@@ -2492,7 +2241,7 @@ lepopup_add_event("onadb", {
 									}
 									if (!defined('HALFDATA_DEMO') || HALFDATA_DEMO != true || current_user_can('manage_options')) {
 										if (!$payment_ok) {
-											$shortcode_addons = array('{{confirmation-url}}' => (defined('UAP_CORE') ? admin_url('do.php') : get_bloginfo('url').'/').'?lepopup-confirm='.$log_record['str-id']);
+											$shortcode_addons = array('{{confirmation-url}}' => get_bloginfo('url').'/').'?lepopup-confirm='.$log_record['str-id'];
 											if ($form_object->form_options['double-enable'] == 'on') {
 												$to = $form_object->replace_shortcodes($form_object->form_options['double-email-recipient']); // UF-checked
 												if (!empty($to) && preg_match("/^[_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,19})$/i", $to)) {

@@ -171,7 +171,7 @@ class lepopup_perfectmoney_class {
 		<input type="hidden" name="PAYMENT_URL_METHOD" value="LINK">
 		<input type="hidden" name="NOPAYMENT_URL" value="'.(empty($data['cancel-url']) ? esc_html($_SERVER["HTTP_REFERER"]) : esc_html($data['cancel-url'])).'">
 		<input type="hidden" name="NOPAYMENT_URL_METHOD" value="LINK">
-		<input type="hidden" name="STATUS_URL" value="'.(defined('UAP_CORE') ? esc_html(admin_url('do.php').'?lepopup-ipn=perfectmoney') : esc_html(get_bloginfo('url').'/?lepopup-ipn=perfectmoney')).'">
+		<input type="hidden" name="STATUS_URL" value="'.esc_html(get_bloginfo('url').'/?lepopup-ipn=perfectmoney').'">
 		<input type="hidden" name="BAGGAGE_FIELDS" value="lepopupipn payer">
 		<input type="hidden" name="lepopupipn" value="perfectmoney">
 		<input type="hidden" name="payer" value="">

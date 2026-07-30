@@ -146,7 +146,7 @@ class lepopup_paypal_class {
 		<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest">
 		<input type="hidden" name="return" value="'.(empty($data['success-url']) ? esc_html($_SERVER["HTTP_REFERER"]) : esc_html($data['success-url'])).'">
 		<input type="hidden" name="cancel_return" value="'.(empty($data['cancel-url']) ? esc_html($_SERVER["HTTP_REFERER"]) : esc_html($data['cancel-url'])).'">
-		<input type="hidden" name="notify_url" value="'.(defined('UAP_CORE') ? esc_html(admin_url('do.php').'?lepopup-ipn=paypal') : esc_html(get_bloginfo('url').'/?lepopup-ipn=paypal')).'">
+		<input type="hidden" name="notify_url" value="'.esc_html(get_bloginfo('url').'/?lepopup-ipn=paypal').'">
 		<input type="submit" class="lepopup-pay" value="Submit">
 	</form>';		
 		$result = array('status' => 'OK', 'form' => $html, 'amount' => number_format($data['amount'], 2, '.', ''), 'currency' => $data["currency"], 'gateway-id' => $data['id']);

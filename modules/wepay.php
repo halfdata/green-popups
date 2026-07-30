@@ -136,7 +136,7 @@ class lepopup_wepay_class {
 			'amount' => number_format($data['amount'], 2, '.', ''),
 			'currency' => $data['currency'],
 			'reference_id' => $data["record-id"].'-'.time(),
-			'callback_uri' => (defined('UAP_CORE') ? admin_url('do.php').'?lepopup-ipn=wepay' : get_bloginfo('url').'/?lepopup-ipn=wepay'),
+			'callback_uri' => get_bloginfo('url').'/?lepopup-ipn=wepay',
 			'hosted_checkout' => array(
 				'redirect_uri' => empty($data['redirect-url']) ? $_SERVER["HTTP_REFERER"] : $data['redirect-url']
 			)

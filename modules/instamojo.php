@@ -201,7 +201,7 @@ class lepopup_instamojo_class {
 			'phone' => $data['phone'],
 			'email' => $data['email'],
 			'redirect_url' => (empty($data['success-url']) ? $_SERVER["HTTP_REFERER"] : $data['success-url']),
-			'webhook' => (defined('UAP_CORE') ? admin_url('do.php').'?lepopup-ipn=instamojo' : get_bloginfo('url').'/?lepopup-ipn=instamojo').'&record-id='.$data["record-id"],
+			'webhook' => get_bloginfo('url').'/?lepopup-ipn=instamojo&record-id='.$data["record-id"],
 			'allow_repeated_payments' => false
 		);
 		$request_data = $this->connect($data['api-key'], $data['auth-token'], 'payment-requests/', $params);

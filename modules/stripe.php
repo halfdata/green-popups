@@ -43,7 +43,7 @@ class lepopup_stripe_class {
 			$html = '
 			<div class="lepopup-integrations-important">
 				'.sprintf(esc_html__('Important! Make sure that you created webhook with the following URL for event "checkout.session.completed" in your %sStripe Dashboard%s.', 'lepopup'), '<a href="https://dashboard.stripe.com/account/webhooks" target="_blank">', '</a>').'
-				<input type="text" readonly="readonly" value="'.(defined('UAP_CORE') ? esc_html(admin_url('do.php').'?lepopup-ipn=stripe') : esc_html(get_bloginfo('url').'/?lepopup-ipn=stripe')).'" onclick="this.focus();this.select();" />
+				<input type="text" readonly="readonly" value="'.esc_html(get_bloginfo('url').'/?lepopup-ipn=stripe').'" onclick="this.focus();this.select();" />
 			</div>
 			<div class="lepopup-properties-item">
 				<div class="lepopup-properties-label">
@@ -176,7 +176,7 @@ class lepopup_stripe_class {
 				'success_url' => (empty($data['success-url']) ? $_SERVER["HTTP_REFERER"] : $data['success-url']),
 				'cancel_url' => (empty($data['cancel-url']) ? $_SERVER["HTTP_REFERER"] : $data['cancel-url']),
 				'payment_method_types' => ['card'],
-				'client_reference_id' => $data["record-id"].'-'.(defined('UAP_CORE') ? base64_encode(admin_url('do.php').'?lepopup-ipn=stripe') : base64_encode(get_bloginfo('url').'/?lepopup-ipn=stripe')),
+				'client_reference_id' => $data["record-id"].'-'.base64_encode(get_bloginfo('url').'/?lepopup-ipn=stripe'),
 				'mode' => 'payment',
 				'line_items' => [
 					[
@@ -214,7 +214,7 @@ class lepopup_stripe_class {
 
 			$id_parts = explode('-', $post_data['data']['object']['client_reference_id']);
 			if (sizeof($id_parts) != 2) exit;
-			$ref_url = (defined('UAP_CORE') ? base64_encode(admin_url('do.php').'?lepopup-ipn=stripe') : base64_encode(get_bloginfo('url').'/?lepopup-ipn=stripe'));
+			$ref_url = base64_encode(get_bloginfo('url').'/?lepopup-ipn=stripe');
 			if (empty($id_parts[1]) || $id_parts[1] != $ref_url) {
 				exit;
 			}

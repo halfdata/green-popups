@@ -193,14 +193,12 @@ class lepopup_legacy_class {
 			$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_campaigns WHERE id <= '".intval($this->migrating_status['campaign-id'])."'", ARRAY_A);
 			$status_output['campaigns'] = array('done' => $tmp["total"], 'total' => $total);
 		}
-		if (!defined('UAP_CORE')) {
-			$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_targets", ARRAY_A);
-			$total = $tmp["total"];
-			if ($total == 0) $status_output['targets'] = array('done' => 1, 'total' => 1);
-			else {
-				$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_targets WHERE id <= '".intval($this->migrating_status['target-id'])."'", ARRAY_A);
-				$status_output['targets'] = array('done' => $tmp["total"], 'total' => $total);
-			}
+		$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_targets", ARRAY_A);
+		$total = $tmp["total"];
+		if ($total == 0) $status_output['targets'] = array('done' => 1, 'total' => 1);
+		else {
+			$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_targets WHERE id <= '".intval($this->migrating_status['target-id'])."'", ARRAY_A);
+			$status_output['targets'] = array('done' => $tmp["total"], 'total' => $total);
 		}
 		$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_subscribers", ARRAY_A);
 		$total = $tmp["total"];
@@ -396,91 +394,89 @@ class lepopup_legacy_class {
 			$status_output['campaigns'] = array('done' => $total, 'total' => $total);
 		}
 
-		if (!defined('UAP_CORE')) {
-			$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_targets", ARRAY_A);
-			$total = $tmp["total"];
-			if ($total == 0) $total = 1;
-			$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_targets WHERE id <= '".intval($this->migrating_status['target-id'])."'", ARRAY_A);
-			$done = $tmp["total"];	
-			$rows = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."ulp_targets WHERE id > '".intval($this->migrating_status['target-id'])."' ORDER BY id ASC LIMIT 0, 100", ARRAY_A);
-			if (sizeof($rows) > 0) {
-				foreach ($rows as $row) {
-					$ulp_target_options = array('mode' => 'every-time', 'mode_period' => 5, 'delay' => 0, 'close_delay' => 0, 'offset' => 600);
-					$unserialized = unserialize($row['options']);
-					if (is_array($unserialized)) $ulp_target_options = array_merge($ulp_target_options, $unserialized);
-					$ulp_target_taxonomies = array();
-					$unserialized = unserialize($row['taxonomies']);
-					if (is_array($unserialized)) $ulp_target_taxonomies = array_merge($ulp_target_taxonomies, $unserialized);
-					$ulp_target_posts = array();
-					$unserialized = unserialize($row['posts']);
-					if (is_array($unserialized)) $ulp_target_posts = array_merge($ulp_target_posts, $unserialized);
-					$item = "";
-					if (array_key_exists($row['popup'], $this->migrating_status['campaign-slugs'])) $item = $this->migrating_status['campaign-slugs'][$row['popup']];
-					else if (array_key_exists($row['popup'], $this->migrating_status['popup-slugs'])) $item = $this->migrating_status['popup-slugs'][$row['popup']];
-					else if ($row['popup'] == 'same') $item = 'same';
-					$item_mobile = "";
-					if (array_key_exists($row['popup_mobile'], $this->migrating_status['campaign-slugs'])) $item_mobile = $this->migrating_status['campaign-slugs'][$row['popup_mobile']];
-					else if (array_key_exists($row['popup_mobile'], $this->migrating_status['popup-slugs'])) $item_mobile = $this->migrating_status['popup-slugs'][$row['popup_mobile']];
-					else if ($row['popup_mobile'] == 'same') $item_mobile = 'same';
-					$period = $row['period_enable'] == 0 ? 'always' : 'period';
-					$target_options = array(
-						'mode' => ($ulp_target_options['mode'] == 'once-session' ? 'once-period' : $ulp_target_options['mode']),
-						'mode-period' => intval($ulp_target_options['mode_period'])*24,
-						'mode-delay' => $ulp_target_options['delay'],
-						'mode-close-delay' => $ulp_target_options['close_delay'],
-						'mode-offset' => $ulp_target_options['offset'],
-						'taxonomies' => $ulp_target_taxonomies,
-						'posts' => $ulp_target_posts,
-						'posts-all' => $row['posts_all'] == 1 ? 'on' : 'off'
-					);
-					$sql = "INSERT INTO ".$wpdb->prefix."lepopup_targets (
-						event, item, item_mobile, post_type, period, period_start, period_end, user_roles, language, options, priority, active, created, deleted) VALUES (
-						'".esc_sql($row['event'])."',
-						'".esc_sql($item)."',
-						'".esc_sql($item_mobile)."',
-						'".esc_sql($row['post_type'])."',
-						'".esc_sql($period)."',
-						'".esc_sql($row['period_start'])."',
-						'".esc_sql($row['period_end'])."',
-						'".esc_sql($row['user_roles'])."',
-						'".esc_sql($row['languages'])."',
-						'".esc_sql(json_encode($target_options))."',
-						'".esc_sql($row['priority'])."',
-						'".esc_sql($row['active'])."',
-						'".time()."',
-						'".esc_sql($row['deleted'])."')";
-					$wpdb->query($sql);
-					$target_id = $wpdb->insert_id;
-					$this->migrating_status['target-ids'][$row['id']] = $target_id;
-					$this->migrating_status['target-id'] = $row['id'];
-					$done++;
-					$status_output['targets'] = array('done' => $done, 'total' => $total);
-					update_option('lepopup-migrating-status', json_encode($this->migrating_status));
-					$current_time = time();
-					if ($current_time - $start_time > 5) {
-						$this->migrating_status['start-time'] = 0;
-						update_option('lepopup-migrating-status', json_encode($this->migrating_status));
-						$return_data = array(
-							'status' => 'CONTINUE',
-							'data' => $status_output
-						);
-						if (!empty($callback)) echo $callback.'('.json_encode($return_data).')';
-						else echo json_encode($return_data);
-						exit;
-					}
-				}
-				$this->migrating_status['start-time'] = 0;
-				update_option('lepopup-migrating-status', json_encode($this->migrating_status));
-				$return_data = array(
-					'status' => 'CONTINUE',
-					'data' => $status_output
+		$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_targets", ARRAY_A);
+		$total = $tmp["total"];
+		if ($total == 0) $total = 1;
+		$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_targets WHERE id <= '".intval($this->migrating_status['target-id'])."'", ARRAY_A);
+		$done = $tmp["total"];	
+		$rows = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."ulp_targets WHERE id > '".intval($this->migrating_status['target-id'])."' ORDER BY id ASC LIMIT 0, 100", ARRAY_A);
+		if (sizeof($rows) > 0) {
+			foreach ($rows as $row) {
+				$ulp_target_options = array('mode' => 'every-time', 'mode_period' => 5, 'delay' => 0, 'close_delay' => 0, 'offset' => 600);
+				$unserialized = unserialize($row['options']);
+				if (is_array($unserialized)) $ulp_target_options = array_merge($ulp_target_options, $unserialized);
+				$ulp_target_taxonomies = array();
+				$unserialized = unserialize($row['taxonomies']);
+				if (is_array($unserialized)) $ulp_target_taxonomies = array_merge($ulp_target_taxonomies, $unserialized);
+				$ulp_target_posts = array();
+				$unserialized = unserialize($row['posts']);
+				if (is_array($unserialized)) $ulp_target_posts = array_merge($ulp_target_posts, $unserialized);
+				$item = "";
+				if (array_key_exists($row['popup'], $this->migrating_status['campaign-slugs'])) $item = $this->migrating_status['campaign-slugs'][$row['popup']];
+				else if (array_key_exists($row['popup'], $this->migrating_status['popup-slugs'])) $item = $this->migrating_status['popup-slugs'][$row['popup']];
+				else if ($row['popup'] == 'same') $item = 'same';
+				$item_mobile = "";
+				if (array_key_exists($row['popup_mobile'], $this->migrating_status['campaign-slugs'])) $item_mobile = $this->migrating_status['campaign-slugs'][$row['popup_mobile']];
+				else if (array_key_exists($row['popup_mobile'], $this->migrating_status['popup-slugs'])) $item_mobile = $this->migrating_status['popup-slugs'][$row['popup_mobile']];
+				else if ($row['popup_mobile'] == 'same') $item_mobile = 'same';
+				$period = $row['period_enable'] == 0 ? 'always' : 'period';
+				$target_options = array(
+					'mode' => ($ulp_target_options['mode'] == 'once-session' ? 'once-period' : $ulp_target_options['mode']),
+					'mode-period' => intval($ulp_target_options['mode_period'])*24,
+					'mode-delay' => $ulp_target_options['delay'],
+					'mode-close-delay' => $ulp_target_options['close_delay'],
+					'mode-offset' => $ulp_target_options['offset'],
+					'taxonomies' => $ulp_target_taxonomies,
+					'posts' => $ulp_target_posts,
+					'posts-all' => $row['posts_all'] == 1 ? 'on' : 'off'
 				);
-				if (!empty($callback)) echo $callback.'('.json_encode($return_data).')';
-				else echo json_encode($return_data);
-				exit;
-			} else {
-				$status_output['targets'] = array('done' => $total, 'total' => $total);
+				$sql = "INSERT INTO ".$wpdb->prefix."lepopup_targets (
+					event, item, item_mobile, post_type, period, period_start, period_end, user_roles, language, options, priority, active, created, deleted) VALUES (
+					'".esc_sql($row['event'])."',
+					'".esc_sql($item)."',
+					'".esc_sql($item_mobile)."',
+					'".esc_sql($row['post_type'])."',
+					'".esc_sql($period)."',
+					'".esc_sql($row['period_start'])."',
+					'".esc_sql($row['period_end'])."',
+					'".esc_sql($row['user_roles'])."',
+					'".esc_sql($row['languages'])."',
+					'".esc_sql(json_encode($target_options))."',
+					'".esc_sql($row['priority'])."',
+					'".esc_sql($row['active'])."',
+					'".time()."',
+					'".esc_sql($row['deleted'])."')";
+				$wpdb->query($sql);
+				$target_id = $wpdb->insert_id;
+				$this->migrating_status['target-ids'][$row['id']] = $target_id;
+				$this->migrating_status['target-id'] = $row['id'];
+				$done++;
+				$status_output['targets'] = array('done' => $done, 'total' => $total);
+				update_option('lepopup-migrating-status', json_encode($this->migrating_status));
+				$current_time = time();
+				if ($current_time - $start_time > 5) {
+					$this->migrating_status['start-time'] = 0;
+					update_option('lepopup-migrating-status', json_encode($this->migrating_status));
+					$return_data = array(
+						'status' => 'CONTINUE',
+						'data' => $status_output
+					);
+					if (!empty($callback)) echo $callback.'('.json_encode($return_data).')';
+					else echo json_encode($return_data);
+					exit;
+				}
 			}
+			$this->migrating_status['start-time'] = 0;
+			update_option('lepopup-migrating-status', json_encode($this->migrating_status));
+			$return_data = array(
+				'status' => 'CONTINUE',
+				'data' => $status_output
+			);
+			if (!empty($callback)) echo $callback.'('.json_encode($return_data).')';
+			else echo json_encode($return_data);
+			exit;
+		} else {
+			$status_output['targets'] = array('done' => $total, 'total' => $total);
 		}
 		
 		$tmp = $wpdb->get_row("SELECT COUNT(*) AS total FROM ".$wpdb->prefix."ulp_subscribers", ARRAY_A);

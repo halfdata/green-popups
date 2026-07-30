@@ -217,16 +217,8 @@ class lepopup_mysql_class {
 				}
 			} else {
 				$wpdb_ext = null;
-				if (defined('UAP_CORE') && class_exists("ICDB")) {
-					try {
-						$wpdb_ext = new ICDB($deps['host'], $deps['port'], $deps['database'], $deps['username'], $deps['password'], $wpdb->prefix);
-					} catch (Exception $e) {
-						$wpdb_ext = null;
-					}
-				} else {
-					$wpdb_ext = new wpdb($deps['username'], $deps['password'], $deps['database'], $deps['host'].(!empty($deps['port']) ? ':'.$deps['port'] : ''));
-					if (!$wpdb_ext->ready) $wpdb_ext = null;
-				}
+				$wpdb_ext = new wpdb($deps['username'], $deps['password'], $deps['database'], $deps['host'].(!empty($deps['port']) ? ':'.$deps['port'] : ''));
+				if (!$wpdb_ext->ready) $wpdb_ext = null;
 				if (!empty($wpdb_ext)) {
 					$rows = $wpdb_ext->get_results('SHOW TABLES', ARRAY_N);
 					foreach ($rows as $record) {
@@ -282,16 +274,8 @@ class lepopup_mysql_class {
 			$columns = $wpdb->get_results('SHOW COLUMNS FROM '.$_table, ARRAY_A);
 		} else {
 			$wpdb_ext = null;
-			if (defined('UAP_CORE') && class_exists("ICDB")) {
-				try {
-					$wpdb_ext = new ICDB($_credentials['host'], $_credentials['port'], $_credentials['database'], $_credentials['username'], $_credentials['password'], $wpdb->prefix);
-				} catch (Exception $e) {
-					$wpdb_ext = null;
-				}
-			} else {
-				$wpdb_ext = new wpdb($_credentials['username'], $_credentials['password'], $_credentials['database'], $_credentials['host'].(!empty($_credentials['port']) ? ':'.$_credentials['port'] : ''));
-				if (!$wpdb_ext->ready) $wpdb_ext = null;
-			}
+			$wpdb_ext = new wpdb($_credentials['username'], $_credentials['password'], $_credentials['database'], $_credentials['host'].(!empty($_credentials['port']) ? ':'.$_credentials['port'] : ''));
+			if (!$wpdb_ext->ready) $wpdb_ext = null;
 			if (!empty($wpdb_ext)) {
 				$columns = $wpdb_ext->get_results('SHOW COLUMNS FROM '.$_table, ARRAY_A);
 			} else {
@@ -347,16 +331,8 @@ class lepopup_mysql_class {
 			$wpdb->query($sql);
 		} else {
 			$wpdb_ext = null;
-			if (defined('UAP_CORE') && class_exists("ICDB")) {
-				try {
-					$wpdb_ext = new ICDB($data['host'], $data['port'], $data['database'], $data['username'], $data['password'], $wpdb->prefix);
-				} catch (Exception $e) {
-					$wpdb_ext = null;
-				}
-			} else {
-				$wpdb_ext = new wpdb($data['username'], $data['password'], $data['database'], $data['host'].(!empty($data['port']) ? ':'.$data['port'] : ''));
-				if (!$wpdb_ext->ready) $wpdb_ext = null;
-			}
+			$wpdb_ext = new wpdb($data['username'], $data['password'], $data['database'], $data['host'].(!empty($data['port']) ? ':'.$data['port'] : ''));
+			if (!$wpdb_ext->ready) $wpdb_ext = null;
 			if (!empty($wpdb_ext)) {
 				$wpdb_ext->query($sql);
 			}

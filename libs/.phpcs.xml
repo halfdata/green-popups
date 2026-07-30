@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<ruleset name="VendorExclusions">
+    <description>Exclude third-party vendor code from Plugin Check</description>
+    <exclude-pattern>*</exclude-pattern>
+</ruleset>

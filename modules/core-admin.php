@@ -125,7 +125,7 @@ class lepopup_admin_class {
 		);
 		echo '
 <script>
-	'.(defined('UAP_CORE') ? 'var lepopup_uap_core = true; ' : '').'var lepopup_ajax_handler = "'.admin_url('admin-ajax.php').'";var lepopup_plugin_url = "'.$lepopup->plugins_url.'"; var lepopup_forms_encoded = "'.base64_encode(json_encode($rows)).'"; var lepopup_gettingstarted_enable = "'.$lepopup->options['gettingstarted-enable'].'"; var lepopup_gettingsstarted_encoded = "'.base64_encode(json_encode($gettingstarted_steps)).'";
+	var lepopup_ajax_handler = "'.admin_url('admin-ajax.php').'";var lepopup_plugin_url = "'.$lepopup->plugins_url.'"; var lepopup_forms_encoded = "'.base64_encode(json_encode($rows)).'"; var lepopup_gettingstarted_enable = "'.$lepopup->options['gettingstarted-enable'].'"; var lepopup_gettingsstarted_encoded = "'.base64_encode(json_encode($gettingstarted_steps)).'";
 	lepopup_gettingstarted_steps = JSON.parse(lepopup_decode64(lepopup_gettingsstarted_encoded));
 </script>';
 	}
@@ -168,16 +168,14 @@ class lepopup_admin_class {
 			, "lepopup-campaigns"
 			, array(&$this, 'admin_campaigns')
 		);
-		if (!defined('UAP_CORE')) {
-			add_submenu_page(
-				"lepopup"
-				, esc_html__('Targeting', 'lepopup')
-				, esc_html__('Targeting', 'lepopup')
-				, $cap
-				, "lepopup-targeting"
-				, array(&$this, 'admin_targeting')
-			);
-		}
+		add_submenu_page(
+			"lepopup"
+			, esc_html__('Targeting', 'lepopup')
+			, esc_html__('Targeting', 'lepopup')
+			, $cap
+			, "lepopup-targeting"
+			, array(&$this, 'admin_targeting')
+		);
 		add_submenu_page(
 			"lepopup"
 			, esc_html__('Log', 'lepopup')
@@ -234,26 +232,6 @@ class lepopup_admin_class {
 			, "lepopup-settings"
 			, array(&$this, 'admin_settings')
 		);
-		if (defined('UAP_CORE')) {
-			add_submenu_page(
-				"lepopup"
-				, esc_html__('How To Use', 'lepopup')
-				, esc_html__('How To Use', 'lepopup')
-				, $cap
-				, "lepopup-using"
-				, array(&$this, 'admin_using')
-			);
-		}
-		if (defined('ULP_VERSION') && ULP_VERSION > 6) {
-			add_submenu_page(
-				"lepopup"
-				, esc_html__('Migrating', 'lepopup')
-				, esc_html__('Migrating', 'lepopup')
-				, $cap
-				, "lepopup-migrating"
-				, array(&$this, 'admin_migrating')
-			);
-		}
 	}
 
 	function admin_using() {
@@ -261,7 +239,7 @@ class lepopup_admin_class {
 		echo '
 		<div class="wrap lepopup-admin lepopup">
 			<h2>'.esc_html__('Green Popups - How To Use', 'lepopup').'
-				<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+				<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 			</h2>
 			<div class="lepopup-settings lepopup-using-page">
 				<h3>'.esc_html__('Embedding Green Popups', 'lepopup').'</h3>
@@ -309,7 +287,7 @@ class lepopup_admin_class {
 		echo '
 <div class="wrap lepopup-admin lepopup">
 	<h2>'.esc_html__('Green Popups - General Settings', 'lepopup').'
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 	<div class="lepopup-tabs lepopup-tabs-main">
 		<a class="lepopup-tab lepopup-tab-active" href="'.admin_url('admin.php').'?page=lepopup-settings">'.esc_html__('General', 'lepopup').'</a>
@@ -337,23 +315,21 @@ class lepopup_admin_class {
 			</table>
 			<h3>'.esc_html__('Miscellaneous', 'lepopup').'</h3>
 			<table class="lepopup-useroptions">';
-		if (!defined('UAP_CORE')) {
-			echo '
-					<tr>
-						<th>'.esc_html__('Pre-load popups', 'lepopup').':</th>
-						<td>
-							<input type="checkbox" id="lepopup-preload" name="lepopup-preload" '.($lepopup->options['preload'] == "on" ? 'checked="checked"' : '').' oninput="if(jQuery(this).is(\':checked\')){jQuery(\'.lepopup-row-preload-event-popups\').slideUp(300);}else{jQuery(\'.lepopup-row-preload-event-popups\').slideDown(300);}"><label for="lepopup-preload"></label><span>'.esc_html__('Pre-load popups', 'lepopup').'</span>
-							<br /><em>'.esc_html__('Tick checkbox to pre-load popups (not recommended). If disabled, popups are pulled on demand using AJAX.', 'lepopup').'</em>
-						</td>
-					</tr>
-					<tr class="lepopup-row-preload-event-popups"'.($lepopup->options['preload'] == "on" ? ' style="display: none;"' : '').'>
-						<th></th>
-						<td>
-							<input type="checkbox" id="lepopup-preload-event-popups" name="lepopup-preload-event-popups" '.($lepopup->options['preload-event-popups'] == "on" ? 'checked="checked"' : '').'><label for="lepopup-preload-event-popups"></label><span>'.esc_html__('Pre-load event popups', 'lepopup').'</span>
-							<br /><em>'.esc_html__('If enabled, only event popups (OnLoad, OnExit, etc.) are loaded together with website. All other popups are pulled on demand using AJAX.', 'lepopup').'</em>
-						</td>
-					</tr>';
-		}
+		echo '
+				<tr>
+					<th>'.esc_html__('Pre-load popups', 'lepopup').':</th>
+					<td>
+						<input type="checkbox" id="lepopup-preload" name="lepopup-preload" '.($lepopup->options['preload'] == "on" ? 'checked="checked"' : '').' oninput="if(jQuery(this).is(\':checked\')){jQuery(\'.lepopup-row-preload-event-popups\').slideUp(300);}else{jQuery(\'.lepopup-row-preload-event-popups\').slideDown(300);}"><label for="lepopup-preload"></label><span>'.esc_html__('Pre-load popups', 'lepopup').'</span>
+						<br /><em>'.esc_html__('Tick checkbox to pre-load popups (not recommended). If disabled, popups are pulled on demand using AJAX.', 'lepopup').'</em>
+					</td>
+				</tr>
+				<tr class="lepopup-row-preload-event-popups"'.($lepopup->options['preload'] == "on" ? ' style="display: none;"' : '').'>
+					<th></th>
+					<td>
+						<input type="checkbox" id="lepopup-preload-event-popups" name="lepopup-preload-event-popups" '.($lepopup->options['preload-event-popups'] == "on" ? 'checked="checked"' : '').'><label for="lepopup-preload-event-popups"></label><span>'.esc_html__('Pre-load event popups', 'lepopup').'</span>
+						<br /><em>'.esc_html__('If enabled, only event popups (OnLoad, OnExit, etc.) are loaded together with website. All other popups are pulled on demand using AJAX.', 'lepopup').'</em>
+					</td>
+				</tr>';
 		echo '
 				<tr>
 					<th>'.esc_html__('GA tracking', 'lepopup').':</th>
@@ -512,22 +488,20 @@ class lepopup_admin_class {
 					</td>
 				</tr>';
 			do_action('lepopup_email_validator_options_show', $lepopup->options['email-validator']);
-			if (!defined('UAP_CORE')) {
-				echo '
-				<tr>
-					<th>'.esc_html__('GeoIP service', 'lepopup').':</th>
-					<td>
-						<select id="lepopup-geoip-service" name="lepopup-geoip-service" onchange="lepopup_geoip_service_changed(this);">';
-				foreach ($lepopup->geoip_services as $key => $label) {
-					echo '<option value="'.esc_html($key).'"'.($lepopup->options['geoip-service'] == $key ? ' selected="selected"' : '').'>'.esc_html($label).'</option>';
-				}
-				echo '
-						</select>
-						<br /><em>'.esc_html__('Please select the GeoIP service.', 'lepopup').'</em>
-					</td>
-				</tr>';
-				do_action('lepopup_geoip_service_options_show', $lepopup->options['geoip-service']);
+			echo '
+			<tr>
+				<th>'.esc_html__('GeoIP service', 'lepopup').':</th>
+				<td>
+					<select id="lepopup-geoip-service" name="lepopup-geoip-service" onchange="lepopup_geoip_service_changed(this);">';
+			foreach ($lepopup->geoip_services as $key => $label) {
+				echo '<option value="'.esc_html($key).'"'.($lepopup->options['geoip-service'] == $key ? ' selected="selected"' : '').'>'.esc_html($label).'</option>';
 			}
+			echo '
+					</select>
+					<br /><em>'.esc_html__('Please select the GeoIP service.', 'lepopup').'</em>
+				</td>
+			</tr>';
+			do_action('lepopup_geoip_service_options_show', $lepopup->options['geoip-service']);
 			echo '
 				<tr>
 					<th>'.esc_html__('User uploads', 'lepopup').':</th>
@@ -576,7 +550,7 @@ class lepopup_admin_class {
 		echo '
 <div class="wrap lepopup-admin lepopup">
 	<h2>'.esc_html__('Green Popups - Advanced Settings', 'lepopup').'
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 	<div class="lepopup-tabs lepopup-tabs-main">
 		<a class="lepopup-tab" href="'.admin_url('admin.php').'?page=lepopup-settings">'.esc_html__('General', 'lepopup').'</a>
@@ -615,8 +589,7 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to insert form data into 3rd party MySQL table. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		if (!defined('UAP_CORE')) {
-			echo '
+		echo '
 				<tr>
 					<th></th>
 					<td>
@@ -624,7 +597,6 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to create new WordPress user when form submitted. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		}
 		echo '
 				<tr><td colspan="2"><hr /></td></tr>
 				<tr>
@@ -760,8 +732,7 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to Encharge. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		if (!defined('UAP_CORE')) {
-			echo '
+		echo '
 				<tr>
 					<th></th>
 					<td>
@@ -769,7 +740,6 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to FluentCRM. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		}
 		echo '
 				<tr>
 					<th></th>
@@ -792,8 +762,7 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to Gist. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		if (!defined('UAP_CORE')) {
-			echo '
+		echo '
 				<tr>
 					<th></th>
 					<td>
@@ -801,7 +770,6 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to Groundhogg. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		}
 		echo '
 				<tr>
 					<th></th>
@@ -838,8 +806,7 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to Interspire. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		if (!defined('UAP_CORE')) {
-			echo '
+		echo '
 				<tr>
 					<th></th>
 					<td>
@@ -847,7 +814,6 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to Jetpack Subscriptions. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		}
 		echo '
 				<tr>
 					<th></th>
@@ -912,8 +878,7 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to Mailmodo. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		if (!defined('UAP_CORE')) {
-			echo '
+		echo '
 				<tr>
 					<th></th>
 					<td>
@@ -921,7 +886,6 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to MailPoet. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		}
 		echo '
 				<tr>
 					<th></th>
@@ -930,8 +894,7 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to Mailrelay. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		if (!defined('UAP_CORE')) {
-			echo '
+		echo '
 				<tr>
 					<th></th>
 					<td>
@@ -939,7 +902,6 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to Mailster. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		}
 		echo '
 				<tr>
 					<th></th>
@@ -1088,8 +1050,7 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to SocketLabs. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		if (!defined('UAP_CORE')) {
-			echo '
+		echo '
 				<tr>
 					<th></th>
 					<td>
@@ -1104,7 +1065,6 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Turn this module on if you want to submit popup data to Tribulant Newsletters. Configure integration on popup editor.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		}
 		echo '
 				<tr>
 					<th></th>
@@ -1277,8 +1237,7 @@ class lepopup_admin_class {
 					</td>
 				</tr>
 			</table>';
-		if (!defined('UAP_CORE')) {
-			echo '
+		echo '
 			<table class="lepopup-useroptions">
 				<tr><td colspan="2"><hr /></td></tr>
 				<tr>
@@ -1296,7 +1255,6 @@ class lepopup_admin_class {
 					</td>
 				</tr>
 			</table>';
-		}
 		echo '
 			</table>
 			<table class="lepopup-useroptions">
@@ -1419,8 +1377,7 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Tick checkbox to display "API Integratons Log" on Settings page.', 'lepopup').'</em>
 					</td>
 				</tr>';
-		if (!defined('UAP_CORE')) {
-			echo '
+		echo '
 				<tr>
 					<th>'.esc_html__('Async Initialization', 'lepopup').':</th>
 					<td>
@@ -1428,7 +1385,6 @@ class lepopup_admin_class {
 						<br /><em>'.esc_html__('Tick checkbox to enable initilaization of event popups asynchronously (recommended for best front-end performance).', 'lepopup').'</em>
 					</td>
 				</tr>';
-		}
 		echo '
 				<tr>
 					<th>'.esc_html__('Enable PHP Session', 'lepopup').':</th>
@@ -1504,7 +1460,7 @@ class lepopup_admin_class {
 		echo '
 <div class="wrap lepopup-admin">
 	<h2>'.esc_html__('Green Popups - API Requests Log', 'lepopup').'
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 	<div class="lepopup-tabs lepopup-tabs-main">
 		<a class="lepopup-tab" href="'.admin_url('admin.php').'?page=lepopup-settings">'.esc_html__('General', 'lepopup').'</a>
@@ -1658,7 +1614,7 @@ class lepopup_admin_class {
 <div class="wrap lepopup-admin">
 	<h2>'.esc_html__('Green Popups - Popups', 'lepopup').'
 		<a class="lepopup-button-h2" href="'.admin_url('admin.php').'?page=lepopup-add">'.esc_html__('Create New Popup', 'lepopup').'</a>
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 	<div class="lepopup-top-forms">
 		<div class="lepopup-top-form-left">
@@ -1697,8 +1653,7 @@ class lepopup_admin_class {
 		</tr>';
 		if (sizeof($rows) > 0) {
 			foreach ($rows as $row) {
-				if (!defined('UAP_CORE')) $preview_url = get_bloginfo('url').'?lepopup='.$row['slug'].'&ac={ANTICACHE}#lepopup-'.$row['slug'];
-				else $preview_url = $lepopup->plugins_url.'/index.html?lepopup='.$row['slug'].'&ac={ANTICACHE}#lepopup-'.$row['slug'];
+				$preview_url = get_bloginfo('url').'?lepopup='.$row['slug'].'&ac={ANTICACHE}#lepopup-'.$row['slug'];
 				
 				echo '
 				<tr>
@@ -1813,7 +1768,7 @@ class lepopup_admin_class {
 				'options' => array(esc_html__("January", "lepopup"),esc_html__("February", "lepopup"),esc_html__("March", "lepopup"),esc_html__("April", "lepopup"),esc_html__("May", "lepopup"),esc_html__("June", "lepopup"),esc_html__("July", "lepopup"),esc_html__("August", "lepopup"),esc_html__("September", "lepopup"),esc_html__("October", "lepopup"),esc_html__("November", "lepopup"),esc_html__("December", "lepopup"))
 			)
 		);
-		if (!defined("UAP_CORE")) wp_deregister_script('wp-color-picker-alpha');
+		wp_deregister_script('wp-color-picker-alpha');
 		$default_form_options = $lepopup->default_form_options();
 		$form_id = null;
 		$form_options = null;
@@ -1905,7 +1860,7 @@ class lepopup_admin_class {
 <div class="wrap lepopup-admin lepopup-admin-editor">
 	<h2>'.esc_html__('Green Popups - Edit Popup', 'lepopup').'
 		<a class="lepopup-button-h2" href="'.admin_url('admin.php').'?page=lepopup-add">'.esc_html__('Create New Popup', 'lepopup').'</a>
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 <div class="lepopup-form-editor">
 	<div class="lepopup-toolbars">
@@ -2203,7 +2158,7 @@ class lepopup_admin_class {
 <div class="wrap lepopup-admin">
 	<h2>'.esc_html__('Green Popups - A/B Campaigns', 'lepopup').'
 		<a class="lepopup-button-h2" href="#" onclick="lepopup_campaign_properties_open(0); return false;">'.esc_html__('Create New Campaign', 'lepopup').'</a>
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 	<div class="lepopup-top-forms">
 		<div class="lepopup-top-form-left">
@@ -2369,7 +2324,7 @@ class lepopup_admin_class {
 		echo '
 <div class="wrap lepopup-admin">
 	<h2>'.esc_html__('Green Popups - Log', 'lepopup').'
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 
 	<div class="lepopup-top-forms">
@@ -2522,7 +2477,7 @@ class lepopup_admin_class {
 		echo '
 <div class="wrap lepopup-admin">
 	<h2>'.esc_html__('Green Popups - Stats', 'lepopup').'
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 
 	<div class="lepopup-top-forms">
@@ -2587,7 +2542,7 @@ class lepopup_admin_class {
 		echo '
 <div class="wrap lepopup-admin">
 	<h2>'.esc_html__('Green Popups - Field Analytics', 'lepopup').'
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 
 	<div class="lepopup-top-forms">
@@ -2666,7 +2621,7 @@ class lepopup_admin_class {
 		echo '
 <div class="wrap lepopup-admin">
 	<h2>'.esc_html__('Green Popups - Transactions', 'lepopup').'
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 
 	<div class="lepopup-top-forms">
@@ -2799,7 +2754,7 @@ class lepopup_admin_class {
 <div class="wrap lepopup-admin">
 	<h2>'.esc_html__('Green Popups - Library', 'lepopup').'
 		<a href="'.admin_url('admin.php').'?page=lepopup-library&lepopup-action=clear-library-cache" class="lepopup-button-h2">'.esc_html__('Clear Library Cache', 'lepopup').'</a>
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 	<div class="lepopup-library-container">';
 		if (empty($items)) {
@@ -2861,7 +2816,7 @@ class lepopup_admin_class {
 			<tr><th>'.esc_html__('Settings', 'lepopup').'</th><td id="lepopup-migrate-status-settings">'.($status['settings'] == 'done' ? '100' : '0').'%</td></tr>
 			<tr><th>'.esc_html__('Popups', 'lepopup').'</th><td id="lepopup-migrate-status-popups">'.($status['popups']['total'] > 0 ? intval(floor(100*intval($status['popups']['done'])/$status['popups']['total'])) : 0).'%</td></tr>
 			<tr><th>'.esc_html__('Campaigns', 'lepopup').'</th><td id="lepopup-migrate-status-campaigns">'.($status['campaigns']['total'] > 0 ? intval(floor(100*intval($status['campaigns']['done'])/$status['campaigns']['total'])) : 0).'%</td></tr>
-			'.(!defined('UAP_CORE') ? '<tr><th>'.esc_html__('Targets', 'lepopup').'</th><td id="lepopup-migrate-status-targets">'.($status['targets']['total'] > 0 ? intval(floor(100*intval($status['targets']['done'])/$status['targets']['total'])) : 0).'%</td></tr>' : '').'
+			<tr><th>'.esc_html__('Targets', 'lepopup').'</th><td id="lepopup-migrate-status-targets">'.($status['targets']['total'] > 0 ? intval(floor(100*intval($status['targets']['done'])/$status['targets']['total'])) : 0).'%</td></tr>
 			<tr><th>'.esc_html__('Log Records', 'lepopup').'</th><td id="lepopup-migrate-status-records">'.($status['records']['total'] > 0 ? intval(floor(100*intval($status['records']['done'])/$status['records']['total'])) : 0).'%</td></tr>';
 		if (class_exists('ulptabs_class') && class_exists('lepopuptab_class')) {
 			echo '
@@ -3244,13 +3199,9 @@ class lepopup_admin_class {
 		if (!file_exists($upload_dir["basedir"].'/'.LEPOPUP_UPLOADS_DIR.'/temp') || !wp_mkdir_p($temp_dir)) {
 			return esc_html__('Make sure that "temp" folder has write permissions.', 'lepopup');
 		}
-		if (!defined('UAP_CORE')) {
-			require_once(ABSPATH.'wp-admin/includes/file.php');
-			WP_Filesystem();
-			$result = unzip_file($_file, $temp_dir);
-		} else {
-			$result = new WP_Error();
-		}
+		require_once(ABSPATH.'wp-admin/includes/file.php');
+		WP_Filesystem();
+		$result = unzip_file($_file, $temp_dir);
 		if (is_wp_error($result)) {
 			try {
 				$zip = new ZipArchive;

@@ -145,7 +145,7 @@ class lepopup_class_targeting {
 <div class="wrap lepopup-admin">
 	<h2>'.esc_html__('Green Popups - Targeting', 'lepopup').'
 		<a class="lepopup-button-h2" href="#" onclick="lepopup_target_properties_open(\''.$event.'\', 0); return false;">'.esc_html__('Create New Target', 'lepopup').'</a>
-		<a href="'.(defined('UAP_CORE') ? 'https://greenpopups.com/documentation/#standalone-script' : 'https://greenpopups.com/documentation/#wordpress-plugin').'" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
+		<a href="https://greenpopups.com/documentation/#wordpress-plugin" class="lepopup-button-h2" target="_blank">'.esc_html__('Online Documentation', 'lepopup').'</a>
 	</h2>
 	<div class="lepopup-targets-events">';
 		foreach ($all_events as $key => $value) {

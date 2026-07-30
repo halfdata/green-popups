@@ -49,7 +49,7 @@ class lepopup_razorpay_class {
 							<label>'.esc_html__('Webhook URL', 'lepopup').'</label>
 						</div>
 						<div class="lepopup-properties-content">
-							<input type="text" readonly="readonly" value="'.(defined('UAP_CORE') ? esc_html(admin_url('do.php').'?lepopup-ipn=razorpay') : esc_html(get_bloginfo('url').'/?lepopup-ipn=razorpay')).'" onclick="this.focus();this.select();" />
+							<input type="text" readonly="readonly" value="'.esc_html(get_bloginfo('url').'/?lepopup-ipn=razorpay').'" onclick="this.focus();this.select();" />
 						</div>
 					</div>
 					<div class="lepopup-properties-item">
