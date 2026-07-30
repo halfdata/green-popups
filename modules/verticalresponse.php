@@ -1,6 +1,6 @@
 <?php
 /* VerticalResponse integration for Green Popups */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_verticalresponse_class {
 	var $options = array(
 		"verticalresponse-connecting" => 0,

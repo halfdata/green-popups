@@ -1,5 +1,5 @@
 <?php
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_widget extends WP_Widget {
 	function __construct() {
 		parent::__construct(false, esc_html__('Green Popups', 'lepopup'));

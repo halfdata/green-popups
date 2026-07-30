@@ -1,5 +1,5 @@
 <?php
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_personal_data_class {
 	function __construct() {
 		global $lepopup;

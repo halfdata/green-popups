@@ -1,6 +1,6 @@
 <?php
 /* Authorize.Net integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_authorizenet_class {
 	var $default_parameters = array(
 		"mode" => "live",

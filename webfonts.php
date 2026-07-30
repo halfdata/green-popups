@@ -1,5 +1,5 @@
 <?php
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 $fonts = '
 {
   "kind": "webfonts#webfontList",

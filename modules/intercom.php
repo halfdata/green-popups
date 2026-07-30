@@ -1,6 +1,6 @@
 <?php
 /* Intercom integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_intercom_class {
 	var $default_parameters = array(
 		"access-token" => "",

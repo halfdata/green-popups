@@ -1,6 +1,6 @@
 <?php
 /* Constant Contact integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 define('LEPOPUP_CONSTANT_CONTACT_DEFAULT_API_KEY', 'byk44ey5gc6nkha7vrxmdg8s');
 class lepopup_constantcontact_class {
 	var $default_parameters = array(

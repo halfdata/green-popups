@@ -1,6 +1,6 @@
 <?php
 /* Mautic integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_mautic_class {
 	var $default_parameters = array(
 		"api-url" => "",

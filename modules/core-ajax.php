@@ -1,5 +1,5 @@
 <?php
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_ajax_class {
 	function __construct() {
 		if (is_admin()) {

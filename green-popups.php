@@ -11,7 +11,7 @@ Requires PHP: 		7.4
 License:           	GPLv2 or later
 License URI:       	https://www.gnu.org/licenses/gpl-2.0.html
 */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 define('LEPOPUP_RECORDS_PER_PAGE', '50');
 define('LEPOPUP_VERSION', '7.6.0');
 define('LEPOPUP_WEBFONTS_VERSION', 4);

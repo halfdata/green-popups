@@ -1,6 +1,6 @@
 <?php
 /* Zoho CRM integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_zohocrm_class {
 	var $options = array(
 		"zohocrm-connecting" => 0,

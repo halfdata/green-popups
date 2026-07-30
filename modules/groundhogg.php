@@ -1,6 +1,6 @@
 <?php
 /* Groundhogg integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_groundhogg_class {
 	var $default_parameters = array(
 		'owner-id' => "",

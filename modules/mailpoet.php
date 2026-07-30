@@ -1,6 +1,6 @@
 <?php
 /* MailPoet integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_mailpoet_class {
 	var $default_parameters = array(
 		'list-id' => "",

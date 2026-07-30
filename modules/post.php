@@ -1,6 +1,6 @@
 <?php
 /* GET/POST integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_post_class {
 	var $default_parameters = array(
 		"url" => "",

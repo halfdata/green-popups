@@ -1,6 +1,6 @@
 <?php
 /* Tribulant Newsletters integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_tribulant_class {
 	var $default_parameters = array(
 		'list-id' => "",

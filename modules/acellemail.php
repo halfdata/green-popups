@@ -1,6 +1,6 @@
 <?php
 /* Acelle Mail integration for Green Popups */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_acellemail_class {
 	var $default_parameters = array(
 		"api-url" => "",

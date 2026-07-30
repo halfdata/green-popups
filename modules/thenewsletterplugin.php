@@ -1,6 +1,6 @@
 <?php
 /* The Newsletter Plugin integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_thenewsletterplugin_class {
 	var $default_parameters = array(
 		'lists' => array(),

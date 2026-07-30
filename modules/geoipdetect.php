@@ -1,6 +1,6 @@
 <?php
 /* Geolocation IP Detection plugin integration for Green Popups */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_geoipdetect_class {
 	function __construct() {
 		if (is_admin()) {

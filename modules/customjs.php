@@ -1,6 +1,6 @@
 <?php
 /* HTML Form integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_customjs_class {
 	var $default_form_options = array(
 		"customjs-afterinit-enable" => "off",

@@ -1,5 +1,5 @@
 <?php
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_admin_class {
 	var $list_table;
 	var $success_message = '';

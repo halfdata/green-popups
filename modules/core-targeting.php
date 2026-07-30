@@ -1,6 +1,6 @@
 <?php
 /* Advanced Targeting for Green Popups */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 define('LEPOPUP_TARGETS_POSTS_PER_PAGE', 50);
 class lepopup_class_targeting {
 	var $default_target = array(

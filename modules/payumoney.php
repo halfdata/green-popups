@@ -1,6 +1,6 @@
 <?php
 /* PayUmoney integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_payumoney_class {
 	var $default_parameters = array(
 		"merchant-key" => "",

@@ -1,6 +1,6 @@
 <?php
 /* GatewayAPI integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_gatewayapi_class {
 	var $default_parameters = array(
 		"api-token" => "",

@@ -1,6 +1,6 @@
 <?php
 /* AWeber integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 define('LEPOPUP_AWEBER_APPID', '8ac652ac');
 class lepopup_aweber_class {
 	var $options = array(

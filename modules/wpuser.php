@@ -1,6 +1,6 @@
 <?php
 /* Create / update WordPress user. */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_wpuser_class {
 	var $default_parameters = array(
 		'role' => 'subscriber',

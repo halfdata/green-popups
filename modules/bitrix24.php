@@ -1,6 +1,6 @@
 <?php
 /* Bitrix24 integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_bitrix24_class {
 	var $default_parameters = array(
 		"api-url" => "",

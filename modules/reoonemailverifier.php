@@ -1,6 +1,6 @@
 <?php
 /* Reoon Email Verifier integration for Green Popups */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_reoonemailverifier_class {
 	var $options = array(
 		"api-key" => ""

@@ -1,6 +1,6 @@
 <?php
 /* Paystack integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_paystack_class {
 	var $default_parameters = array(
 		"secret-key" => "",

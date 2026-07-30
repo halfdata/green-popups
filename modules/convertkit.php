@@ -1,6 +1,6 @@
 <?php
 /* ConvertKit integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_convertkit_class {
 	var $default_parameters = array(
 		"api-key" => "",

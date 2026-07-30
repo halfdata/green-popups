@@ -1,6 +1,6 @@
 <?php
 /* Newsman integration for Green Popups */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_newsman_class {
 	var $default_parameters = array(
 		"user-id" => "",

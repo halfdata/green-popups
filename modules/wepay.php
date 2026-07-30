@@ -1,6 +1,6 @@
 <?php
 /* WePay integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_wepay_class {
 	var $default_parameters = array(
 		"access-token" => "",

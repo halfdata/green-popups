@@ -1,6 +1,6 @@
 <?php
 /* Zapier integration for Green Forms */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_zapier_class {
 	var $default_parameters = array(
 		"webhook-url" => "",

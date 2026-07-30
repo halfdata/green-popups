@@ -1,6 +1,6 @@
 <?php
 /* Email List Verify integration for Green Popups */
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_emaillistverify_class {
 	var $options = array(
 		"api-key" => ""

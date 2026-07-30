@@ -1,5 +1,5 @@
 <?php
-if (!defined('UAP_CORE') && !defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_form {
 	var $form_options, $form_pages, $form_elements, $form_inputs, $form_logic, $form_dependencies, $id = null, $name, $slug;
 	var $cache_html = null, $cache_style = null, $cache_uids = array(), $cache_time = null;
