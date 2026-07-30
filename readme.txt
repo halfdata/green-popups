@@ -1,6 +1,6 @@
 === Green Popups ===
 Contributors: halfdata
-Tags: popup, popups, popup builder, opt-in, subscribe, modal, marketing
+Tags: popup, popups, popup builder, modal, marketing
 Requires at least: 6.0
 Tested up to: 7.0
 Stable tag: 7.6.0
