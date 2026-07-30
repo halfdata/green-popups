@@ -198,7 +198,7 @@ class lepopup_aweber_class {
 	<title>'.esc_html__('Get AWeber Authorization Code', 'lepopup').'</title>
 	<link rel="stylesheet" media="all" href="'.$lepopup->plugins_url.'/css/oauth.css" />
 	<link rel="stylesheet" media="all" href="'.$lepopup->plugins_url.'/css/fontawesome-all.min.css" />
-	<script src="'.$lepopup->plugins_url.'/js/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" type="text/javascript"></script>
 	<script>
 		function appid_changed() {
 			jQuery("a").each(function() {

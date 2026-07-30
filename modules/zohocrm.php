@@ -256,7 +256,7 @@ class lepopup_zohocrm_class {
 	<title>'.esc_html__('Connect to Zoho CRM', 'lepopup').'</title>
 	<link rel="stylesheet" media="all" href="'.$lepopup->plugins_url.'/css/oauth.css" />
 	<link rel="stylesheet" media="all" href="'.$lepopup->plugins_url.'/css/fontawesome-all.min.css" />
-	<script src="'.$lepopup->plugins_url.'/js/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="main-container">
@@ -275,7 +275,7 @@ class lepopup_zohocrm_class {
 	<title>'.esc_html__('Connect to Zoho CRM', 'lepopup').'</title>
 	<link rel="stylesheet" media="all" href="'.$lepopup->plugins_url.'/css/oauth.css" />
 	<link rel="stylesheet" media="all" href="'.$lepopup->plugins_url.'/css/fontawesome-all.min.css" />
-	<script src="'.$lepopup->plugins_url.'/js/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" type="text/javascript"></script>
 	<script>
 		function domain_changed() {
 			jQuery("a").each(function() {
