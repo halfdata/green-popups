@@ -1,8 +1,22 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 class lepopup_ajax_class {
+	var $frontend_actions = array(
+		'lepopup-async-init',
+		'lepopup-remote-init',
+		'lepopup-upload',
+		'lepopup-upload-progress',
+		'lepopup-upload-delete',
+		'lepopup-front-submit',
+		'lepopup-front-next',
+		'lepopup-front-add-impression',
+		'lepopup-front-popup-load',
+		'lepopup-verticalresponse-init-connection',
+		'lepopup-zohocrm-connect'
+	);
 	function __construct() {
 		if (is_admin()) {
+			add_action('init', array(&$this, "init"));
 			add_action('wp_ajax_lepopup-settings-save', array(&$this, "admin_settings_save"));
 			add_action('wp_ajax_lepopup-advanced-settings-save', array(&$this, "admin_advanced_settings_save"));
 			add_action('wp_ajax_lepopup-cookies-reset', array(&$this, "admin_reset_cookie"));
@@ -59,10 +73,14 @@ class lepopup_ajax_class {
 			add_action('wp_ajax_nopriv_lepopup-front-add-impression', array(&$this, "front_add_impression"));
 			add_action('wp_ajax_lepopup-front-popup-load', array(&$this, "front_popup_load"));
 			add_action('wp_ajax_nopriv_lepopup-front-popup-load', array(&$this, "front_popup_load"));
-			/* Personal Data - 2020-12-09 - begin */
 			include_once(dirname(__FILE__).'/core-personal.php');
 			$lepopup_personal = new lepopup_personal_data_class();
-			/* Personal Data - 2020-12-09 - end */
+		}
+	}
+
+	function init() {
+		if (defined('DOING_AJAX') && DOING_AJAX && isset($_REQUEST['action']) && substr($_REQUEST['action'], 0, 8) == 'lepopup-' && !in_array($_REQUEST['action'], $this->frontend_actions)) {
+			check_ajax_referer('lepopup');
 		}
 	}
 
@@ -1791,6 +1809,7 @@ lepopup_add_event("onadb", {
 				</div></div>
 			</div>
 			<input type="hidden" name="action" value="lepopup-campaign-save" />
+			<input type="hidden" name="_wpnonce" value="'.esc_html(wp_create_nonce('lepopup')).'" />
 			<input type="hidden" name="campaign-id" value="'.(empty($campaign_details) ? '0' : intval($campaign_details['id'])).'" />
 		</form>';
 			$return_data = array(

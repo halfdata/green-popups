@@ -27,7 +27,7 @@ function lepopup_cookies_reset(_button) {
 	jQuery(button_object).find("i").attr("class", "fas fa-spinner fa-spin");
 	jQuery(button_object).addClass("lepopup-button-disabled");
 	lepopup_sending = true;
-	var post_data = {"action" : "lepopup-cookies-reset"};
+	var post_data = {"action" : "lepopup-cookies-reset", "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -234,7 +234,7 @@ function lepopup_campaigns_status_toggle(_object) {
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
 	jQuery(_object).closest("tr").find("td.column-active").html("<i class='fas fa-spinner fa-spin'></i>");
-	var post_data = {"action" : "lepopup-campaigns-status-toggle", "campaign-id" : campaign_id, "campaign-status" : campaign_status};
+	var post_data = {"action" : "lepopup-campaigns-status-toggle", "campaign-id" : campaign_id, "campaign-status" : campaign_status, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -298,7 +298,7 @@ function _lepopup_campaigns_delete(_object) {
 	var do_label = jQuery(_object).html();
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
-	var post_data = {"action" : "lepopup-campaigns-delete", "campaign-id" : campaign_id};
+	var post_data = {"action" : "lepopup-campaigns-delete", "campaign-id" : campaign_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -356,7 +356,7 @@ function _lepopup_campaigns_stats_reset(_object) {
 	var do_label = jQuery(_object).html();
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
-	var post_data = {"action" : "lepopup-campaigns-stats-reset", "campaign-id" : campaign_id};
+	var post_data = {"action" : "lepopup-campaigns-stats-reset", "campaign-id" : campaign_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -454,7 +454,7 @@ function lepopup_save(_object) {
 	for (var i=0; i<lepopup_form_elements.length; i++) {
 		if (jQuery("#lepopup-element-"+i).length && lepopup_form_elements[i] != null) post_elements.push(lepopup_encode64(JSON.stringify(lepopup_form_elements[i])));
 	}
-	var post_data = {"action" : "lepopup-form-save", "form-id" : jQuery("#lepopup-id").val(), "form-slug" : jQuery("#lepopup-slug").val(), "form-options" : lepopup_encode64(JSON.stringify(lepopup_form_options)), "form-pages" : post_pages, "form-elements" : post_elements};
+	var post_data = {"action" : "lepopup-form-save", "form-id" : jQuery("#lepopup-id").val(), "form-slug" : jQuery("#lepopup-slug").val(), "form-options" : lepopup_encode64(JSON.stringify(lepopup_form_options)), "form-pages" : post_pages, "form-elements" : post_elements, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -2592,7 +2592,8 @@ function lepopup_integrations_ajax_options_focus(_object) {
 	}
 	var post_data = {
 		action: 	"lepopup-"+provider+"-"+field, 
-		deps:		lepopup_encode64(JSON.stringify(deps))
+		deps:		lepopup_encode64(JSON.stringify(deps)),
+		_wpnonce:	lepopup_wpnonce
 	};
 	if (jQuery(_object).parent().find(".lepopup-integrations-ajax-options-list").length == 0) {
 		jQuery(_object).parent().append("<div class='lepopup-integrations-ajax-options-list'><div class='lepopup-integrations-ajax-options-list-data'></div><i class='fas fa-spin fa-spinner'></i></div>");
@@ -2666,7 +2667,8 @@ function lepopup_integrations_ajax_multiselect_scroll(_object) {
 		}
 		var post_data = {
 			"action" :	"lepopup-"+provider+"-"+sub_action,
-			"deps":		lepopup_encode64(JSON.stringify(deps))
+			"deps":		lepopup_encode64(JSON.stringify(deps)),
+			"_wpnonce":	lepopup_wpnonce
 		};
 		jQuery(_object).find(".lepopup-integrations-ajax-multiselect-loading").slideDown(300);
 		jQuery.ajax({
@@ -2723,7 +2725,8 @@ function lepopup_integrations_ajax_inline_html(_object) {
 	
 	var post_data = {
 		action: 	"lepopup-"+provider+"-"+inline_action, 
-		deps:		lepopup_encode64(JSON.stringify(deps))
+		deps:		lepopup_encode64(JSON.stringify(deps)),
+		_wpnonce:	lepopup_wpnonce
 	};
 	jQuery(_object).find("i").attr("class", "fas fa-spinner fa-spin");
 	jQuery(_object).addClass("lepopup-button-disabled");
@@ -2793,7 +2796,8 @@ function lepopup_properties_integrations_details_toggle(_object) {
 		if (lepopup_sending) return false;
 		lepopup_sending = true;
 		var post_data = {
-			action:		"lepopup-"+provider+"-settings-html"
+			action:		"lepopup-"+provider+"-settings-html",
+			_wpnonce:	lepopup_wpnonce
 		};
 		var idx = jQuery(item).find("input[name='lepopup-integrations-idx']").val();
 		if (idx >= 0 && idx <= lepopup_form_options["integrations"].length) {
@@ -2985,7 +2989,8 @@ function lepopup_integrations_zapier_connect(_object) {
 	var post_data = {
 		"action": 		"lepopup-zapier-connect",
 		"webhook-url":	lepopup_encode64(jQuery(item).find("[name='webhook-url']").val()),
-		"fields":		lepopup_encode64(JSON.stringify(fields))
+		"fields":		lepopup_encode64(JSON.stringify(fields)),
+		"_wpnonce":		lepopup_wpnonce
 	};
 	jQuery(_object).find("i").attr("class", "fas fa-spinner fa-spin");
 	jQuery(_object).addClass("lepopup-button-disabled");
@@ -3038,7 +3043,8 @@ function lepopup_properties_payment_gateways_details_toggle(_object) {
 		if (lepopup_sending) return false;
 		lepopup_sending = true;
 		var post_data = {
-			action:		"lepopup-"+provider+"-settings-html"
+			action:		"lepopup-"+provider+"-settings-html",
+			_wpnonce:	lepopup_wpnonce
 		};
 		var idx = jQuery(item).find("input[name='lepopup-payment-gateways-idx']").val();
 		if (idx >= 0 && idx <= lepopup_form_options["payment-gateways"].length) {
@@ -5645,7 +5651,7 @@ function lepopup_forms_status_toggle(_object) {
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
 	jQuery(_object).closest("tr").find("td.column-active").html("<i class='fas fa-spinner fa-spin'></i>");
-	var post_data = {"action" : "lepopup-forms-status-toggle", "form-id" : form_id, "form-status" : form_status};
+	var post_data = {"action" : "lepopup-forms-status-toggle", "form-id" : form_id, "form-status" : form_status, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -5711,7 +5717,7 @@ function _lepopup_forms_delete(_object) {
 	var do_label = jQuery(_object).html();
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
-	var post_data = {"action" : "lepopup-forms-delete", "form-id" : form_id};
+	var post_data = {"action" : "lepopup-forms-delete", "form-id" : form_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -5771,7 +5777,7 @@ function _lepopup_forms_duplicate(_object) {
 	var do_label = jQuery(_object).html();
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
-	var post_data = {"action" : "lepopup-forms-duplicate", "form-id" : form_id};
+	var post_data = {"action" : "lepopup-forms-duplicate", "form-id" : form_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -5867,7 +5873,7 @@ function lepopup_more_using_open(_object) {
 	lepopup_more_active = jQuery(_object).attr("data-id");
 	var mode = jQuery(_object).attr("data-mode");
 	//if (mode != "campaign" && mode != "tab") mode = "form";
-	var post_data = {"action" : "lepopup-"+mode+"-using", "item-id" : lepopup_more_active};
+	var post_data = {"action" : "lepopup-"+mode+"-using", "item-id" : lepopup_more_active, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -5930,7 +5936,7 @@ function lepopup_campaign_properties_open(_campaign_id) {
 	jQuery("#lepopup-campaign-properties .lepopup-admin-popup-title h3 span").html("");
 	jQuery("#lepopup-campaign-properties .lepopup-admin-popup-loading").show();
 	lepopup_campaign_properties_active = _campaign_id;
-	var post_data = {"action" : "lepopup-campaign-properties", "campaign-id" : lepopup_campaign_properties_active};
+	var post_data = {"action" : "lepopup-campaign-properties", "campaign-id" : lepopup_campaign_properties_active, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -5995,7 +6001,7 @@ function lepopup_campaign_stats_open(_campaign_id) {
 	jQuery("#lepopup-campaign-stats .lepopup-admin-popup-title h3 span").html("");
 	jQuery("#lepopup-campaign-stats .lepopup-admin-popup-loading").show();
 	lepopup_campaign_stats_active = _campaign_id;
-	var post_data = {"action" : "lepopup-campaign-stats", "campaign-id" : lepopup_campaign_stats_active};
+	var post_data = {"action" : "lepopup-campaign-stats", "campaign-id" : lepopup_campaign_stats_active, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -6142,7 +6148,7 @@ function _lepopup_stats_reset(_object) {
 	var do_label = jQuery(_object).html();
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
-	var post_data = {"action" : "lepopup-stats-reset", "form-id" : form_id};
+	var post_data = {"action" : "lepopup-stats-reset", "form-id" : form_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -6203,7 +6209,7 @@ function lepopup_record_details_open(_object) {
 		href = href.replace(/{ID}/g, lepopup_record_active);
 		jQuery(print_button).find("a").attr("href", href);
 	}
-	var post_data = {"action" : "lepopup-record-details", "record-id" : lepopup_record_active};
+	var post_data = {"action" : "lepopup-record-details", "record-id" : lepopup_record_active, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -6269,7 +6275,7 @@ function _lepopup_records_delete(_object) {
 	var do_label = jQuery(_object).html();
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
-	var post_data = {"action" : "lepopup-records-delete", "record-id" : record_id};
+	var post_data = {"action" : "lepopup-records-delete", "record-id" : record_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -6375,7 +6381,7 @@ function lepopup_integrations_log_details_open(_object) {
 	jQuery("#lepopup-record-details .lepopup-admin-popup-title h3 span").html("");
 	jQuery("#lepopup-record-details .lepopup-admin-popup-loading").show();
 	lepopup_record_active = jQuery(_object).attr("data-id");
-	var post_data = {"action" : "lepopup-integrations-log-details", "record-id" : lepopup_record_active};
+	var post_data = {"action" : "lepopup-integrations-log-details", "record-id" : lepopup_record_active, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -6433,7 +6439,7 @@ function _lepopup_integrations_log_delete(_object) {
 	var do_label = jQuery(_object).html();
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
-	var post_data = {"action" : "lepopup-integrations-log-delete", "record-id" : record_id};
+	var post_data = {"action" : "lepopup-integrations-log-delete", "record-id" : record_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -6551,7 +6557,7 @@ function lepopup_transaction_details_open(_object) {
 		href = href.replace(/{ID}/g, lepopup_record_active);
 		jQuery(print_button).find("a").attr("href", href);
 	}
-	var post_data = {"action" : "lepopup-transaction-details", "transaction-id" : lepopup_record_active};
+	var post_data = {"action" : "lepopup-transaction-details", "transaction-id" : lepopup_record_active, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -6615,7 +6621,7 @@ function _lepopup_transactions_delete(_object) {
 	var do_label = jQuery(_object).html();
 	jQuery(_object).html("<i class='fas fa-spinner fa-spin'></i> "+doing_label);
 	jQuery(_object).closest("tr").find(".row-actions").addClass("visible");
-	var post_data = {"action" : "lepopup-transactions-delete", "transaction-id" : record_id};
+	var post_data = {"action" : "lepopup-transactions-delete", "transaction-id" : record_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -6712,7 +6718,7 @@ function lepopup_field_analytics_load(_object) {
 	lepopup_sending = true;
 	jQuery(_object).find("i").attr("class", "fas fa-spinner fa-spin");
 	jQuery(_object).addClass("lepopup-stats-button-disabled");
-	var post_data = {"action" : "lepopup-field-analytics-load", "form-id" : jQuery("#lepopup-stats-form").val(), "start-date" : jQuery("#lepopup-stats-date-start").val(), "end-date" : jQuery("#lepopup-stats-date-end").val(), "period" : (jQuery("#lepopup-stats-period").is(":checked") ? "on" : "off")};
+	var post_data = {"action" : "lepopup-field-analytics-load", "form-id" : jQuery("#lepopup-stats-form").val(), "start-date" : jQuery("#lepopup-stats-date-start").val(), "end-date" : jQuery("#lepopup-stats-date-end").val(), "period" : (jQuery("#lepopup-stats-period").is(":checked") ? "on" : "off"), "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -6886,7 +6892,7 @@ function lepopup_stats_load(_object) {
 	lepopup_sending = true;
 	jQuery(_object).find("i").attr("class", "fas fa-spinner fa-spin");
 	jQuery(_object).addClass("lepopup-stats-button-disabled");
-	var post_data = {"action" : "lepopup-stats-load", "form-id" : jQuery("#lepopup-stats-form").val(), "start-date" : jQuery("#lepopup-stats-date-start").val(), "end-date" : jQuery("#lepopup-stats-date-end").val()};
+	var post_data = {"action" : "lepopup-stats-load", "form-id" : jQuery("#lepopup-stats-form").val(), "start-date" : jQuery("#lepopup-stats-date-start").val(), "end-date" : jQuery("#lepopup-stats-date-end").val(), "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -7062,7 +7068,7 @@ function _lepopup_record_field_empty(_button, _object) {
 	var record_id = jQuery(_object).closest(".lepopup-record-details").attr("data-id");
 	var icon = jQuery(_button).find("i").attr("class");
 	jQuery(_button).find("i").attr("class", "fas fa-spinner fa-spin");
-	var post_data = {"action" : "lepopup-record-field-empty", "record-id" : record_id, "field-id" : field_id};
+	var post_data = {"action" : "lepopup-record-field-empty", "record-id" : record_id, "field-id" : field_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -7118,7 +7124,7 @@ function _lepopup_record_field_remove(_button, _object) {
 	var record_id = jQuery(_object).closest(".lepopup-record-details").attr("data-id");
 	var icon = jQuery(_button).find("i").attr("class");
 	jQuery(_button).find("i").attr("class", "fas fa-spinner fa-spin");
-	var post_data = {"action" : "lepopup-record-field-remove", "record-id" : record_id, "field-id" : field_id};
+	var post_data = {"action" : "lepopup-record-field-remove", "record-id" : record_id, "field-id" : field_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -7163,7 +7169,7 @@ function lepopup_record_field_load_editor(_button) {
 	var record_id = jQuery(_button).closest(".lepopup-record-details").attr("data-id");
 	var icon = jQuery(_button).find("i").attr("class");
 	jQuery(_button).find("i").attr("class", "fas fa-spinner fa-spin");
-	var post_data = {"action" : "lepopup-record-field-load-editor", "record-id" : record_id, "field-id" : field_id};
+	var post_data = {"action" : "lepopup-record-field-load-editor", "record-id" : record_id, "field-id" : field_id, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -7215,7 +7221,7 @@ function lepopup_record_field_save(_button) {
 	var record_id = jQuery(_button).closest(".lepopup-record-details").attr("data-id");
 	var icon = jQuery(_button).find("i").attr("class");
 	jQuery(_button).find("i").attr("class", "fas fa-spinner fa-spin");
-	var post_data = {"action" : "lepopup-record-field-save", "record-id" : record_id, "field-id" : field_id, "value" : lepopup_encode64(jQuery(_button).closest(".lepopup-record-field-editor").find("textarea, input, select").serialize())};
+	var post_data = {"action" : "lepopup-record-field-save", "record-id" : record_id, "field-id" : field_id, "value" : lepopup_encode64(jQuery(_button).closest(".lepopup-record-field-editor").find("textarea, input, select").serialize()), "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -7334,7 +7340,7 @@ function lepopup_targets_save_list() {
 	lepopup_target_loading = true;
 	lepopup_global_message_show("info", "<i class='fas fa-spinner fa-spin'></i> Saving targets...");
 	clearTimeout(lepopup_global_message_timer);
-	var post_data = {"action" : "lepopup-targets-save-list", "lepopup-event": jQuery("#lepopup-targets-event").val()};
+	var post_data = {"action" : "lepopup-targets-save-list", "lepopup-event": jQuery("#lepopup-targets-event").val(), "_wpnonce" : lepopup_wpnonce};
 	var active = [];
 	jQuery("#lepopup-targets-list-active .lepopup-targets-list-item").each(function() {
 		var id = jQuery(this).attr("data-id");
@@ -7401,7 +7407,7 @@ function lepopup_target_properties_open(_event, _target_id) {
 	jQuery("#lepopup-target-properties .lepopup-admin-popup-title h3 span").html("");
 	jQuery("#lepopup-target-properties .lepopup-admin-popup-loading").show();
 	lepopup_target_properties_active = _target_id;
-	var post_data = {"action" : "lepopup-target-properties", "lepopup-event" : _event, "lepopup-id" : lepopup_target_properties_active};
+	var post_data = {"action" : "lepopup-target-properties", "lepopup-event" : _event, "lepopup-id" : lepopup_target_properties_active, "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -7492,7 +7498,7 @@ function lepopup_target_post_type_selected(_object) {
 		jQuery("#lepopup-target-content-url-keywords").hide();
 		lepopup_target_loading = true;
 		jQuery("#lepopup-target-post-types").addClass("lepopup-target-disabled");
-		var post_data = {"action" : "lepopup-target-taxonomies", "lepopup-post-type" : post_type_id, "lepopup-event" : jQuery("#lepopup-targets-event").val()};
+		var post_data = {"action" : "lepopup-target-taxonomies", "lepopup-post-type" : post_type_id, "lepopup-event" : jQuery("#lepopup-targets-event").val(), "_wpnonce" : lepopup_wpnonce};
 		jQuery.ajax({
 			type	: "POST",
 			url		: lepopup_ajax_handler, 
@@ -7574,7 +7580,7 @@ function lepopup_target_posts_load(_new) {
 	jQuery(".lepopup-target-taxonomies").addClass("lepopup-target-disabled-all");
 	jQuery("#lepopup-target-post-types").addClass("lepopup-target-disabled-all");
 	if (_new) jQuery("#lepopup-target-next-offset").val(0);
-	var post_data = {"action" : "lepopup-target-posts", "lepopup-post-type" : jQuery("[name='lepopup-post-type']:checked").val(), 'lepopup-offset' : jQuery("#lepopup-target-next-offset").val(), "lepopup-posts-all" : (jQuery("#lepopup-target-post-all").is(":checked") ? "on" : "off")};
+	var post_data = {"action" : "lepopup-target-posts", "lepopup-post-type" : jQuery("[name='lepopup-post-type']:checked").val(), 'lepopup-offset' : jQuery("#lepopup-target-next-offset").val(), "lepopup-posts-all" : (jQuery("#lepopup-target-post-all").is(":checked") ? "on" : "off"), "_wpnonce" : lepopup_wpnonce};
 	jQuery(".lepopup-target-taxonomies").find("input").each(function(){
 		var name = jQuery(this).attr("name");
 		if (name.indexOf("[]") > 0 && jQuery(this).is(":checked")) {
@@ -7738,7 +7744,7 @@ function lepopup_htmlform_connect(_object) {
 	jQuery(_object).find("i").attr("class", "fas fa-spinner fa-spin");
 	jQuery(_object).addClass("lepopup-button-disabled");
 	lepopup_htmlform_connecting = true;
-	var post_data = {"action" : "lepopup-htmlform-connect", "html": jQuery(_object).parent().find("textarea").val()};
+	var post_data = {"action" : "lepopup-htmlform-connect", "html": jQuery(_object).parent().find("textarea").val(), "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -7779,7 +7785,7 @@ function lepopup_htmlform_disconnect(_object) {
 	jQuery(_object).find("i").attr("class", "fas fa-spinner fa-spin");
 	jQuery(_object).addClass("lepopup-button-disabled");
 	lepopup_htmlform_connecting = true;
-	var post_data = {"action" : "lepopup-htmlform-disconnect", "html" : jQuery(_object).closest(".lepopup-htmlform-form").find("input[name='html']").val()};
+	var post_data = {"action" : "lepopup-htmlform-disconnect", "html" : jQuery(_object).closest(".lepopup-htmlform-form").find("input[name='html']").val(), "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 
@@ -7822,7 +7828,7 @@ function lepopup_migrate() {
 	lepopup_sending = true;
 	jQuery("#lepopup-migrate-button").addClass("lepopup-intro-button-disabled");
 	jQuery("#lepopup-migrate-button").html("<i class='lepopup-if lepopup-if-spin lepopup-if-spinner'></i> "+jQuery("#lepopup-migrate-button").attr("data-loading"));
-	var post_data = {"action" : "lepopup-migrate"};
+	var post_data = {"action" : "lepopup-migrate", "_wpnonce" : lepopup_wpnonce};
 	jQuery.ajax({
 		type	: "POST",
 		url		: lepopup_ajax_handler, 

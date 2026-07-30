@@ -245,7 +245,10 @@ class lepopup_class_targeting {
 			else $event = 'onload';
 			$html = '
 		<form class="lepopup-target-properties-form" enctype="multipart/form-data" method="post" style="margin: 0px" action="'.admin_url('admin.php').'">
-			<input type="hidden" name="action" value="lepopup-target-save"><input type="hidden" name="lepopup-event" value="'.esc_html($event).'">'.(!empty($target_details['id']) ? '<input type="hidden" id="lepopup-id" name="lepopup-id" value="'.intval($target_details['id']).'">' : '').'
+			<input type="hidden" name="action" value="lepopup-target-save">
+			<input type="hidden" name="lepopup-event" value="'.esc_html($event).'">
+			'.(!empty($target_details['id']) ? '<input type="hidden" id="lepopup-id" name="lepopup-id" value="'.intval($target_details['id']).'">' : '').'
+			<input type="hidden" name="_wpnonce" value="'.esc_html(wp_create_nonce('lepopup')).'">
 			<div class="lepopup-properties-item">
 				<div class="lepopup-properties-label"><label>'.esc_html__('Popup or A/B Campaign', 'lepopup').'</label></div>
 				<div class="lepopup-properties-tooltip"><i class="fas fa-question-circle lepopup-tooltip-anchor tooltipstered"></i><div class="lepopup-tooltip-content">'.esc_html__('Select popup or A/B Campaign for your target.', 'lepopup').'</div></div>

@@ -125,6 +125,7 @@ class lepopup_admin_class {
 		);
 		echo '
 <script>
+	var lepopup_wpnonce = "'.wp_create_nonce('lepopup').'";
 	var lepopup_ajax_handler = "'.admin_url('admin-ajax.php').'";var lepopup_plugin_url = "'.$lepopup->plugins_url.'"; var lepopup_forms_encoded = "'.base64_encode(json_encode($rows)).'"; var lepopup_gettingstarted_enable = "'.$lepopup->options['gettingstarted-enable'].'"; var lepopup_gettingsstarted_encoded = "'.base64_encode(json_encode($gettingstarted_steps)).'";
 	lepopup_gettingstarted_steps = JSON.parse(lepopup_decode64(lepopup_gettingsstarted_encoded));
 </script>';
@@ -530,6 +531,7 @@ class lepopup_admin_class {
 			<hr>
 			<div class="lepopup-button-container">
 				<input type="hidden" id="lepopup-gettingstarted-enable" name="lepopup-gettingstarted-enable" value="'.esc_html($lepopup->options['gettingstarted-enable']).'" class="widefat" />
+				<input type="hidden" name="_wpnonce" value="'.esc_html(wp_create_nonce('lepopup')).'" />
 				<input type="hidden" name="action" value="lepopup-settings-save" />
 				<a class="lepopup-button" onclick="return lepopup_settings_save(this);"><i class="fas fa-check"></i><label>'.esc_html__('Save Settings', 'lepopup').'</label></a>
 			</div>
@@ -1423,6 +1425,7 @@ class lepopup_admin_class {
 			<hr>
 			<div class="lepopup-button-container">
 				<input type="hidden" name="action" value="lepopup-advanced-settings-save" />
+				<input type="hidden" name="_wpnonce" value="'.esc_html(wp_create_nonce('lepopup')).'" />
 				<a class="lepopup-button" onclick="return lepopup_settings_save(this);"><i class="fas fa-check"></i><label>'.esc_html__('Save Settings', 'lepopup').'</label></a>
 			</div>
 		</div>
@@ -1498,7 +1501,10 @@ class lepopup_admin_class {
 	<div class="lepopup-pageswitcher">'.$switcher.'</div>
 	<table id="lepopup-table-log" class="lepopup-table-list widefat">
 		<tr>
-			<th class="lepopup-column lepopup-column-checkbox" style="width: 35px;"><input type="hidden" name="action" value="lepopup-bulk-integrations-log-delete" /></th>
+			<th class="lepopup-column lepopup-column-checkbox" style="width: 35px;">
+				<input type="hidden" name="action" value="lepopup-bulk-integrations-log-delete" />
+				<input type="hidden" name="_wpnonce" value="'.wp_create_nonce('lepopup').'" />
+			</th>
 			<th style="width: 100px;">'.esc_html__('Provider', 'lepopup').'</th>
 			<th>'.esc_html__('Endpoint', 'lepopup').'</th>
 			<th style="width: 80px;">'.esc_html__('Method', 'lepopup').'</th>
@@ -2371,7 +2377,10 @@ class lepopup_admin_class {
 	<div class="lepopup-pageswitcher">'.$switcher.'</div>
 	<table id="lepopup-table-log" class="lepopup-table-list widefat" style="display:none;">
 		<tr>
-			<th class="lepopup-column lepopup-column-checkbox" style="width: 35px;"><input type="hidden" name="action" value="lepopup-bulk-records-delete" /></th>
+			<th class="lepopup-column lepopup-column-checkbox" style="width: 35px;">
+				<input type="hidden" name="action" value="lepopup-bulk-records-delete" />
+				<input type="hidden" name="_wpnonce" value="'.wp_create_nonce('lepopup').'" />
+			</th>
 			<th class="lepopup-column lepopup-column-id">'.esc_html__('ID', 'lepopup').'</th>
 			<th class="lepopup-column lepopup-column-primary">'.esc_html__('Primary Field', 'lepopup').'</th>
 			<th class="lepopup-column lepopup-column-secondary">'.esc_html__('Secondray Field', 'lepopup').'</th>
@@ -2642,7 +2651,10 @@ class lepopup_admin_class {
 	<div class="lepopup-pageswitcher">'.$switcher.'</div>
 	<table id="lepopup-table-transactions" class="lepopup-table-list widefat">
 		<tr>
-			<th style="width: 35px;" class="lepopup-column lepopup-column-checkbox"><input type="hidden" name="action" value="lepopup-bulk-transactions-delete" /></th>
+			<th style="width: 35px;" class="lepopup-column lepopup-column-checkbox">
+				<input type="hidden" name="action" value="lepopup-bulk-transactions-delete" />
+				<input type="hidden" name="_wpnonce" value="'.wp_create_nonce('lepopup').'" />
+			</th>
 			<th>'.esc_html__('Payer', 'lepopup').'</th>
 			<th>'.esc_html__('Status', 'lepopup').'</th>
 			<th style="width: 120px;">'.esc_html__('Amount', 'lepopup').'</th>
