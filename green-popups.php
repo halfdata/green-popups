@@ -6,7 +6,7 @@ Description:		The most advanced popup builder for WordPress.
 Version:			7.6.0
 Author:				Ivan Churakov
 Author URI:			https://www.linkedin.com/in/ivan-churakov/
-Requires at least: 	6.0
+Requires at least: 	6.9
 Requires PHP: 		7.4
 License:           	GPLv2 or later
 License URI:       	https://www.gnu.org/licenses/gpl-2.0.html
