@@ -44,7 +44,7 @@ class lepopup_admin_class {
 			wp_enqueue_style('jquery-ui', $lepopup->plugins_url.'/css/jquery-ui/jquery-ui.min.css', array(), LEPOPUP_VERSION);
 			wp_enqueue_script('tooltipster', $lepopup->plugins_url.'/js/tooltipster.bundle.min.js', array('jquery'), LEPOPUP_VERSION);
 			wp_enqueue_script('airdatepicker', $lepopup->plugins_url.'/js/airdatepicker.js', array('jquery'), LEPOPUP_VERSION);
-			wp_enqueue_script('chart', $lepopup->plugins_url.'/js/chart.min.js', array(), LEPOPUP_VERSION);
+			wp_enqueue_script('chart', $lepopup->plugins_url.'/js/chart.umd.min.js', array(), LEPOPUP_VERSION);
 			wp_enqueue_script('jquery.mask', $lepopup->plugins_url.'/js/jquery.mask.min.js', array('jquery'), LEPOPUP_VERSION);
 			wp_enqueue_script('jquery-ui-core');
 			wp_enqueue_script('jquery-ui-draggable');
