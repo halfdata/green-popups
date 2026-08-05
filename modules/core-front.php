@@ -210,7 +210,7 @@ class lepopup_front_class {
 		}
 		if ($lepopup->options['signature-enable'] == 'on') {
 			if ($lepopup->options['signature-js-disable'] != 'on') {
-				wp_enqueue_script('signature', $lepopup->plugins_url.'/js/signature_pad'.$min.'.js', array('lepopup'), LEPOPUP_VERSION, true);
+				wp_enqueue_script('signature', $lepopup->plugins_url.'/js/signature_pad.umd.min.js', array('lepopup'), LEPOPUP_VERSION, true);
 			}
 		}
 		if ($lepopup->options['range-slider-enable'] == 'on') {

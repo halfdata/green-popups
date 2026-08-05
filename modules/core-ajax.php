@@ -2624,7 +2624,7 @@ lepopup_add_event("onadb", {
 		$return_data['plugins'] = array();
 		if ($lepopup->options['signature-enable'] == 'on') {
 			if ($lepopup->options['signature-js-disable'] != 'on') {
-				$return_data['resources']['js'][] = $lepopup->plugins_url.'/js/signature_pad'.$min.'.js?ver='.LEPOPUP_VERSION;
+				$return_data['resources']['js'][] = $lepopup->plugins_url.'/js/signature_pad.umd.min.js?ver='.LEPOPUP_VERSION;
 			}
 			$return_data['plugins'][] = 'signature_pad';
 		}
