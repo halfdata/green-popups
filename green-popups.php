@@ -3,7 +3,7 @@
 Plugin Name: 		Green Popups
 Plugin URI:			https://greenpopups.com/
 Description:		The most advanced popup builder for WordPress.
-Version:			7.6.0
+Version:			7.6.1
 Author:				Ivan Churakov
 Author URI:			https://www.linkedin.com/in/ivan-churakov/
 Requires at least: 	6.9
@@ -13,7 +13,7 @@ License URI:       	https://www.gnu.org/licenses/gpl-2.0.html
 */
 if ( ! defined( 'ABSPATH' ) ) exit;
 define('LEPOPUP_RECORDS_PER_PAGE', '50');
-define('LEPOPUP_VERSION', '7.6.0');
+define('LEPOPUP_VERSION', '7.6.1');
 define('LEPOPUP_WEBFONTS_VERSION', 4);
 define('LEPOPUP_EXPORT_VERSION', '0002');
 define('LEPOPUP_LIBRARY_URL', 'https://greenpopups.com/library/');
