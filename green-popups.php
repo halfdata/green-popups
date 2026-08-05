@@ -29,6 +29,8 @@ define('LEPOPUP_UPLOAD_STATUS_DELETED', 2);
 define('LEPOPUP_STYLE_TYPE_USER', 0);
 define('LEPOPUP_STYLE_TYPE_NATIVE', 1);
 
+include_once(dirname(__FILE__).'/update.php');
+
 register_activation_hook(__FILE__, array("lepopup_class", "install"));
 register_deactivation_hook(__FILE__, array("lepopup_class", "uninstall"));
 
@@ -2366,6 +2368,7 @@ class lepopup_class {
 			include_once(dirname(__FILE__).'/modules/core-front.php');
 			$lepopup_front = new lepopup_front_class();
 		}
+		$update = new halfdata_update_v2(__FILE__, 'green-popups', 'FREE-GREEN-POPUPS');
 	}
 
 	static function install($_networkwide = null) {
