@@ -2368,6 +2368,7 @@ class lepopup_class {
 			include_once(dirname(__FILE__).'/modules/core-front.php');
 			$lepopup_front = new lepopup_front_class();
 		}
+		add_filter('plugin_row_meta', array(&$this, 'plugin_meta_links'), 10, 2);
 		$update = new halfdata_update_v2(__FILE__, 'green-popups', 'FREE-GREEN-POPUPS');
 	}
 
@@ -2711,6 +2712,17 @@ class lepopup_class {
 			include_once(dirname(__FILE__).'/modules/core-targeting.php');
 			lepopup_class_targeting::deactivate();
 		}
+	}
+
+	function plugin_meta_links($_plugin_meta, $_plugin_file) {
+		if ($_plugin_file === plugin_basename( __FILE__ )) {
+			$_plugin_meta[] = sprintf(
+				'<a href="%s" target="_blank"><strong>%s</strong></a>',
+				'https://buymeacoffee.com/halfdata',
+				esc_html__('Buy me a coffee', 'lepopup')
+			);
+		}
+		return $_plugin_meta;
 	}
 
 	function get_advanced_options() {
