@@ -313,7 +313,7 @@ class lepopup_razorpay_class {
 				}
 			}
 			$sql = "INSERT INTO ".$wpdb->prefix."lepopup_transactions (record_id, provider, payer_name, payer_email, gross, currency, payment_status, transaction_type, txn_id, details, created, deleted ) VALUES (
-				'".$item_id."',
+				'".esc_sql($item_id)."',
 				'razorpay',
 				'".esc_sql($payer_name)."',
 				'".esc_sql($payer_id)."',
