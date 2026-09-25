@@ -2260,7 +2260,7 @@ lepopup_add_event("onadb", {
 									}
 									if (!defined('HALFDATA_DEMO') || HALFDATA_DEMO != true || current_user_can('manage_options')) {
 										if (!$payment_ok) {
-											$shortcode_addons = array('{{confirmation-url}}' => get_bloginfo('url').'/').'?lepopup-confirm='.$log_record['str-id'];
+											$shortcode_addons = array('{{confirmation-url}}' => get_bloginfo('url').'/?lepopup-confirm='.$log_record['str-id']);
 											if ($form_object->form_options['double-enable'] == 'on') {
 												$to = $form_object->replace_shortcodes($form_object->form_options['double-email-recipient']); // UF-checked
 												if (!empty($to) && preg_match("/^[_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,19})$/i", $to)) {
